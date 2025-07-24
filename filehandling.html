@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java File Handling</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f3faff;
+        text-align: center;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #0d47a1;
+        margin-bottom: 30px;
+      }
+
+      .file-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 50px;
+        margin-top: 40px;
+      }
+
+      .file,
+      .java {
+        width: 150px;
+        height: 150px;
+        background-color: #e3f2fd;
+        border: 2px dashed #90caf9;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #1565c0;
+        position: relative;
+      }
+
+      .arrow {
+        width: 60px;
+        height: 2px;
+        background-color: #1565c0;
+        position: relative;
+      }
+
+      .arrow::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 10px solid #1565c0;
+        position: absolute;
+        right: -10px;
+        top: -6px;
+      }
+
+      .animated-arrow {
+        animation: moveArrow 2s linear infinite;
+      }
+
+      @keyframes moveArrow {
+        0% {
+          transform: translateX(0);
+        }
+        50% {
+          transform: translateX(10px);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+
+      code {
+        background-color: #eeeeee;
+        display: block;
+        text-align: left;
+        padding: 15px;
+        border-radius: 8px;
+        font-size: 13px;
+        margin: 30px auto 10px;
+        white-space: pre-wrap;
+        max-width: 700px;
+      }
+
+      button {
+        margin-top: 30px;
+        padding: 10px 25px;
+        background-color: #1565c0;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0d47a1;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java File Handling</h2>
+
+    <div class="file-box">
+      <div class="java">Java Program</div>
+      <div class="arrow" id="arrow"></div>
+      <div class="file">File.txt</div>
+    </div>
+
+    <button onclick="startFileFlow()">Simulate File Write</button>
+
+    <code id="codeBlock">
+      // Writing to a File in Java import java.io.FileWriter; import
+      java.io.IOException; public class FileWriteDemo { public static void
+      main(String[] args) { try { FileWriter writer = new
+      FileWriter("output.txt"); writer.write("Hello from Java!");
+      writer.close(); System.out.println("Successfully wrote to the file."); }
+      catch (IOException e) { System.out.println("An error occurred.");
+      e.printStackTrace(); } } }
+    </code>
+
+    <script>
+      function startFileFlow() {
+        const arrow = document.getElementById("arrow");
+        arrow.classList.add("animated-arrow");
+
+        setTimeout(() => {
+          arrow.classList.remove("animated-arrow");
+          alert("File written successfully! (Simulated)");
+        }, 3000);
+      }
+    </script>
+  </body>
+</html>

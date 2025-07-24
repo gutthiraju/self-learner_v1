@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>While Loop Example</title>
+    <style>
+      .box {
+        background-color: blue;
+        animation-name: move;
+        animation-duration: 10s;
+        animation-iteration-count: 1;
+        animation-fill-mode: backwards;
+        height: 50px;
+        width: 50px;
+        border-radius: 25%;
+      }
+      @keyframes move {
+        0% {
+          transform: translate(90px, 80px);
+        }
+        10% {
+          transform: translate(170px, 80px);
+        }
+        20% {
+          transform: translate(110px, 220px);
+        }
+        30% {
+          transform: translate(230px, 80px);
+        }
+        40% {
+          transform: translate(170px, 80px);
+        }
+        50% {
+          transform: translate(110px, 220px);
+        }
+        60% {
+          transform: translate(230px, 80px);
+        }
+        70% {
+          transform: translate(170px, 80px);
+        }
+        80% {
+          transform: translate(110px, 220px);
+        }
+        90% {
+          transform: translate(230px, 80px);
+        }
+        100% {
+          transform: translate(170px, 80px);
+        }
+      }
+      .main {
+        margin-left: 200px;
+      }
+      #roots {
+        color: aliceblue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="box"><h1 id="roots"></h1></div>
+      <h1>i = 1;</h1>
+      <h1>while&nbsp;&nbsp;(i <= 3)</h1>
+      <br />
+      <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sysout(i)</h1>
+      <strong>output:-</strong>
+      <h2 id="root"></h2>
+    </div>
+
+    <script>
+      let i = 1;
+      function num() {
+        if (i <= 3) {
+          document.getElementById("root").innerHTML += i + " ";
+          document.getElementById("roots").innerHTML = i;
+          i++;
+        } else {
+          document.getElementById("roots").innerHTML = i;
+          clearInterval(interval);
+        }
+      }
+      let interval = setInterval(num, 2400);
+    </script>
+  </body>
+</html>

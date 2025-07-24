@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java throw & throws Animation</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: #e3f2fd;
+        padding: 30px;
+        text-align: center;
+      }
+      .code-box {
+        background: #bbdefb;
+        border-radius: 10px;
+        padding: 20px;
+        font-family: "Courier New", monospace;
+        font-size: 16px;
+        text-align: left;
+        max-width: 700px;
+        margin: 0 auto 20px;
+        white-space: pre-wrap;
+      }
+      .highlight {
+        background: #f44336;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .output {
+        background: #c8e6c9;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 10px;
+        font-size: 18px;
+        color: #1b5e20;
+      }
+      button {
+        padding: 10px 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        background: #2196f3;
+        color: white;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #1976d2;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🚨 Java `throw` and `throws` Animation</h2>
+
+    <div class="code-box" id="codeBox">
+      <span
+        >static void checkAge(int age)
+        <span class="throws">throws</span> ArithmeticException {</span
+      ><br />
+      &nbsp;&nbsp;<span id="line1">if (age &lt; 18) {</span><br />
+      &nbsp;&nbsp;&nbsp;&nbsp;<span id="line2"
+        ><span class="throw">throw</span> new ArithmeticException("Access
+        denied");</span
+      ><br />
+      &nbsp;&nbsp;} else {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;<span id="line3"
+        >System.out.println("Access granted.");</span
+      ><br />
+      &nbsp;&nbsp;}<br />
+      }<br /><br />
+      <span>public static void main(String[] args) {</span><br />
+      &nbsp;&nbsp;<span id="line4">checkAge(16);</span><br />
+      }
+    </div>
+
+    <button onclick="simulate()">▶️ Run Code</button>
+    <div class="output" id="resultBox">Output will appear here...</div>
+
+    <script>
+      function clearHighlights() {
+        document
+          .querySelectorAll(".highlight")
+          .forEach((el) => el.classList.remove("highlight"));
+      }
+
+      function highlight(id) {
+        clearHighlights();
+        document.getElementById(id).classList.add("highlight");
+      }
+
+      async function simulate() {
+        const output = document.getElementById("resultBox");
+        output.innerText = "Checking age = 16...\n";
+
+        highlight("line1");
+        await delay(1500);
+
+        output.innerText += "Age is less than 18\n";
+
+        highlight("line2");
+        await delay(1500);
+
+        output.innerText +=
+          "❌ Exception Thrown: ArithmeticException - Access denied\n";
+
+        clearHighlights();
+      }
+
+      function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+    </script>
+  </body>
+</html>

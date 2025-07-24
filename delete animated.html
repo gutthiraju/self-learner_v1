@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Array Operations Animation</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #f0f4c3;
+        text-align: center;
+        padding: 30px;
+      }
+      .array-box {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 30px 0;
+      }
+      .cell {
+        width: 50px;
+        height: 50px;
+        background-color: #aed581;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: 18px;
+        transition: all 0.3s;
+      }
+      .highlight {
+        background-color: #ffb300 !important;
+      }
+      .deleted {
+        background-color: #ef5350 !important;
+        color: white;
+      }
+      .output {
+        margin-top: 20px;
+        font-size: 18px;
+        white-space: pre-wrap;
+        color: #33691e;
+      }
+      button {
+        padding: 10px 18px;
+        margin: 5px;
+        background-color: #558b2f;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🔄 Array Operations: Insert, Search, Delete</h2>
+
+    <div class="array-box" id="array">
+      <div class="cell">1</div>
+      <div class="cell">2</div>
+      <div class="cell">3</div>
+      <div class="cell">4</div>
+      <div class="cell">5</div>
+    </div>
+
+    <button onclick="insertElement()">➕ Insert 99 at Index 2</button>
+    <button onclick="searchElement()">🔍 Search 4</button>
+    <button onclick="deleteElement()">❌ Delete at Index 3</button>
+
+    <div class="output" id="log">Action Log:</div>
+
+    <script>
+      let array = [1, 2, 3, 4, 5];
+      let container = document.getElementById("array");
+      let log = document.getElementById("log");
+
+      function updateDisplay() {
+        container.innerHTML = "";
+        array.forEach((val) => {
+          const div = document.createElement("div");
+          div.className = "cell";
+          div.textContent = val;
+          container.appendChild(div);
+        });
+      }
+
+      function insertElement() {
+        log.innerText += "\nInserting 99 at index 2...";
+        array.splice(2, 0, 99);
+        updateDisplay();
+        container.children[2].classList.add("highlight");
+      }
+
+      function searchElement() {
+        log.innerText += "\nSearching for 4...";
+        const index = array.indexOf(4);
+        if (index !== -1) {
+          container.children[index].classList.add("highlight");
+          log.innerText += `\nFound 4 at index ${index}`;
+        } else {
+          log.innerText += "\n4 not found.";
+        }
+      }
+
+      function deleteElement() {
+        log.innerText += `\nDeleting value at index 3 (${array[3]})...`;
+        array.splice(3, 1);
+        updateDisplay();
+        container.children[3]?.classList.add("deleted");
+      }
+    </script>
+  </body>
+</html>

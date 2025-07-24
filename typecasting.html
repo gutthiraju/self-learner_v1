@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Java Typecasting Visualization</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #fefbd8;
+        padding: 20px;
+      }
+      .line {
+        margin: 8px 0;
+      }
+      .highlight {
+        background: #c6f6d5;
+        padding: 3px 5px;
+        border-radius: 5px;
+      }
+      .output {
+        font-weight: bold;
+        margin-top: 15px;
+      }
+      button {
+        margin-top: 10px;
+        padding: 5px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java Typecasting</h2>
+
+    <div class="line" id="line1">int x = 42;</div>
+    <div class="line" id="line2">double y = x; // Widening</div>
+    <div class="line" id="line3">System.out.println(y);</div>
+
+    <div class="line" id="line4">double pi = 3.14159;</div>
+    <div class="line" id="line5">int approx = (int) pi; // Narrowing</div>
+    <div class="line" id="line6">System.out.println(approx);</div>
+
+    <button onclick="runCode()">Run Simulation</button>
+
+    <div class="output" id="result"></div>
+
+    <script>
+      const steps = [
+        { id: "line1", out: "" },
+        { id: "line2", out: "" },
+        { id: "line3", out: "Widening: int to double -> 42.0" },
+        { id: "line4", out: "" },
+        { id: "line5", out: "" },
+        { id: "line6", out: "Narrowing: double to int -> 3" },
+      ];
+
+      let i = 0;
+      function runCode() {
+        document
+          .querySelectorAll(".line")
+          .forEach((l) => l.classList.remove("highlight"));
+        document.getElementById("result").innerHTML = "";
+        i = 0;
+        const timer = setInterval(() => {
+          if (i > 0)
+            document
+              .getElementById(steps[i - 1].id)
+              .classList.remove("highlight");
+          if (i < steps.length) {
+            document.getElementById(steps[i].id).classList.add("highlight");
+            if (steps[i].out) {
+              document.getElementById("result").innerHTML +=
+                steps[i].out + "<br>";
+            }
+            i++;
+          } else {
+            clearInterval(timer);
+          }
+        }, 1200);
+      }
+    </script>
+  </body>
+</html>

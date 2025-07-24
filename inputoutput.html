@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Java Input/Output Visualization</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #f0f8ff;
+        padding: 20px;
+      }
+      .line {
+        margin: 8px 0;
+      }
+      .highlight {
+        background: #d2f4c4;
+        padding: 4px;
+        border-radius: 4px;
+      }
+      .output {
+        font-weight: bold;
+        margin-top: 15px;
+      }
+      input {
+        margin: 5px;
+        padding: 5px;
+      }
+      button {
+        padding: 6px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java Input & Output</h2>
+    <div class="line" id="code1">Scanner sc = new Scanner(System.in);</div>
+    <div class="line" id="code2">System.out.print("Enter your name: ");</div>
+    <input id="name" placeholder="Type name..." />
+    <div class="line" id="code3">String name = sc.nextLine();</div>
+
+    <div class="line" id="code4">System.out.print("Enter your age: ");</div>
+    <input id="age" placeholder="Type age..." type="number" />
+    <div class="line" id="code5">int age = sc.nextInt();</div>
+
+    <div class="line" id="code6">
+      System.out.println("Hello " + name + "! You are " + age + " years old.");
+    </div>
+
+    <button onclick="runCode()">Run Java Simulation</button>
+
+    <div class="output" id="result"></div>
+
+    <script>
+      function runCode() {
+        let nameVal = document.getElementById("name").value;
+        let ageVal = document.getElementById("age").value;
+
+        if (!nameVal || !ageVal) {
+          document.getElementById("result").innerHTML =
+            "Please enter both name and age.";
+          return;
+        }
+
+        document
+          .querySelectorAll(".line")
+          .forEach((el) => el.classList.remove("highlight"));
+
+        let steps = ["code1", "code2", "code3", "code4", "code5", "code6"];
+        let i = 0;
+
+        function highlightStep() {
+          if (i > 0)
+            document.getElementById(steps[i - 1]).classList.remove("highlight");
+
+          if (i < steps.length) {
+            document.getElementById(steps[i]).classList.add("highlight");
+            if (i === steps.length - 1) {
+              document.getElementById("result").innerHTML =
+                "Hello " + nameVal + "! You are " + ageVal + " years old.";
+            }
+            i++;
+          } else {
+            clearInterval(timer);
+          }
+        }
+
+        let timer = setInterval(highlightStep, 1200);
+      }
+    </script>
+  </body>
+</html>

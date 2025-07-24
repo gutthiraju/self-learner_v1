@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Method Overloading Animation</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #e6f7ff;
+        padding: 20px;
+      }
+      .step {
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        margin-bottom: 10px;
+        transition: all 0.3s ease-in-out;
+      }
+      .highlight {
+        border-color: #000;
+        box-shadow: 0 0 8px #333;
+      }
+
+      .m1 {
+        background-color: #fff3cd;
+        border-color: #ffc107;
+      }
+      .m2 {
+        background-color: #d4edda;
+        border-color: #28a745;
+      }
+      .m3 {
+        background-color: #cce5ff;
+        border-color: #007bff;
+      }
+
+      .output {
+        background: #222;
+        color: #0f0;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      button {
+        background: #673ab7;
+        color: white;
+        padding: 10px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📘 Java Method Overloading Visualization</h2>
+
+    <div id="step1" class="step m1">
+      1️⃣ <code>greet()</code> called — No Parameters
+    </div>
+    <div id="step2" class="step m2">
+      2️⃣ <code>greet("Alice")</code> called — One String Parameter
+    </div>
+    <div id="step3" class="step m3">
+      3️⃣ <code>greet("Bob", 25)</code> called — String + int Parameters
+    </div>
+
+    <button onclick="animate()">▶️ Start Animation</button>
+
+    <div class="output" id="outBox">Output:</div>
+
+    <script>
+      function animate() {
+        let steps = ["step1", "step2", "step3"];
+        let messages = [
+          "Hello!",
+          "Hello, Alice!",
+          "Hello, Bob. You are 25 years old.",
+        ];
+        let i = 0;
+
+        steps.forEach((id) =>
+          document.getElementById(id).classList.remove("highlight")
+        );
+        document.getElementById("outBox").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (i > 0) {
+            document.getElementById(steps[i - 1]).classList.remove("highlight");
+          }
+          if (i < steps.length) {
+            document.getElementById(steps[i]).classList.add("highlight");
+            document.getElementById("outBox").innerText += "\n" + messages[i];
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1500);
+      }
+    </script>
+  </body>
+</html>

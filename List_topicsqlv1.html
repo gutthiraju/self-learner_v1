@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SQL Topics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        background: linear-gradient(145deg, #0f0c29, #302b63, #24243e);
+        color: #e0f7fa;
+        padding: 40px 20px;
+        animation: fadeIn 1.8s ease;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      nav {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      nav h1 {
+        font-family: "Orbitron", sans-serif;
+        font-size: 3rem;
+        color: #00eaff;
+        text-shadow: 0 0 15px #00f2ff;
+        animation: pulse 2s infinite ease-in-out;
+      }
+
+      @keyframes pulse {
+        0% {
+          text-shadow: 0 0 10px #00f2ff, 0 0 20px #00f2ff;
+        }
+        100% {
+          text-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
+        }
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
+
+      .card {
+        background: rgba(255, 255, 255, 0.07);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        transition: all 0.4s ease;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+        box-shadow: 0 0 10px rgba(0, 255, 255, 0.15);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card:hover {
+        transform: translateY(-10px) scale(1.03);
+        background: rgba(0, 255, 255, 0.1);
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle at center,
+          rgba(0, 255, 255, 0.3) 0%,
+          transparent 70%
+        );
+        transform: rotate(25deg);
+        transition: opacity 0.5s;
+        opacity: 0;
+      }
+
+      .card:hover::before {
+        opacity: 1;
+      }
+
+      .card a {
+        text-decoration: none;
+        color: #ffffff;
+        font-size: 1.1rem;
+        font-weight: bold;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 0.9rem;
+        color: #b2ebf2;
+      }
+
+      @media (max-width: 600px) {
+        nav h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>SQL Topics & Chapters</h1>
+    </nav>
+
+    <div class="grid">
+      <div class="card"><a href="#">Introduction to SQL</a></div>
+      <div class="card"><a href="#">Databases & Tables</a></div>
+      <div class="card"><a href="#">Data Types</a></div>
+      <div class="card"><a href="#">Constraints</a></div>
+      <div class="card"><a href="#">SELECT Statement</a></div>
+      <div class="card"><a href="#">WHERE Clause</a></div>
+      <div class="card"><a href="#">ORDER BY</a></div>
+      <div class="card"><a href="#">GROUP BY & HAVING</a></div>
+      <div class="card"><a href="#">INSERT INTO</a></div>
+      <div class="card"><a href="#">UPDATE</a></div>
+      <div class="card"><a href="#">DELETE</a></div>
+      <div class="card"><a href="#">JOINS (INNER, LEFT, RIGHT, FULL)</a></div>
+      <div class="card"><a href="#">UNION & UNION ALL</a></div>
+      <div class="card"><a href="#">Subqueries</a></div>
+      <div class="card"><a href="#">Views</a></div>
+      <div class="card"><a href="#">Indexes</a></div>
+      <div class="card"><a href="#">Stored Procedures</a></div>
+      <div class="card"><a href="#">Functions</a></div>
+      <div class="card"><a href="#">Triggers</a></div>
+      <div class="card"><a href="#">Normalization</a></div>
+    </div>
+
+    <footer>
+      <p>© 2025 SQL Learner | Powered with 💙 and 💡</p>
+    </footer>
+  </body>
+</html>

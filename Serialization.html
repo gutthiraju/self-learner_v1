@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java Serialization Demo</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f0f8ff;
+        text-align: center;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #0d47a1;
+        margin-bottom: 30px;
+      }
+
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 60px;
+        margin-top: 50px;
+      }
+
+      .box {
+        width: 160px;
+        height: 160px;
+        background-color: #bbdefb;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(21, 101, 192, 0.3);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        color: #1565c0;
+        position: relative;
+        padding: 15px;
+        text-align: center;
+      }
+
+      .arrow {
+        width: 80px;
+        height: 2px;
+        background-color: #1565c0;
+        position: relative;
+      }
+
+      .arrow::after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 12px solid #1565c0;
+        position: absolute;
+        right: -12px;
+        top: -6px;
+      }
+
+      .arrow.move {
+        animation: moveArrow 2.5s linear forwards;
+      }
+
+      @keyframes moveArrow {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(90px);
+        }
+      }
+
+      button {
+        margin-top: 40px;
+        padding: 12px 28px;
+        font-size: 16px;
+        background-color: #1565c0;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0d47a1;
+      }
+
+      code {
+        display: block;
+        background-color: #e8f0fe;
+        padding: 15px;
+        border-radius: 8px;
+        max-width: 700px;
+        margin: 30px auto 0;
+        text-align: left;
+        font-size: 13px;
+        white-space: pre-wrap;
+        box-shadow: inset 0 0 5px #90caf9;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java Serialization: Save & Restore Object State</h2>
+
+    <div class="container">
+      <div class="box" id="objBox">
+        Java Object<br /><small>(Serializable)</small>
+      </div>
+      <div class="arrow" id="arrow1"></div>
+      <div class="box" id="fileBox">
+        Serialized File<br /><small>(object.ser)</small>
+      </div>
+      <div class="arrow" id="arrow2"></div>
+      <div class="box" id="objBox2">Deserialized Object</div>
+    </div>
+
+    <button onclick="startSerialization()">Start Serialization</button>
+
+    <code>
+      import java.io.*; class Student implements Serializable { String name; int
+      age; Student(String n, int a) { name = n; age = a; } public String
+      toString() { return "Student{name='" + name + "', age=" + age + "}"; } }
+      public class SerializeDemo { public static void main(String[] args) {
+      Student s = new Student("Alice", 21); // Serialize object to file try
+      (ObjectOutputStream oos = new ObjectOutputStream(new
+      FileOutputStream("object.ser"))) { oos.writeObject(s);
+      System.out.println("Object serialized."); } catch (IOException e) {
+      e.printStackTrace(); } // Deserialize object from file try
+      (ObjectInputStream ois = new ObjectInputStream(new
+      FileInputStream("object.ser"))) { Student s2 = (Student) ois.readObject();
+      System.out.println("Deserialized: " + s2); } catch (IOException |
+      ClassNotFoundException e) { e.printStackTrace(); } } }
+    </code>
+
+    <script>
+      function startSerialization() {
+        const arrow1 = document.getElementById("arrow1");
+        const arrow2 = document.getElementById("arrow2");
+
+        arrow1.classList.remove("move");
+        arrow2.classList.remove("move");
+
+        // trigger reflow to restart animation
+        void arrow1.offsetWidth;
+        void arrow2.offsetWidth;
+
+        arrow1.classList.add("move");
+
+        setTimeout(() => {
+          arrow2.classList.add("move");
+        }, 3000);
+
+        setTimeout(() => {
+          alert("✔ Serialization & Deserialization simulated!");
+        }, 6000);
+      }
+    </script>
+  </body>
+</html>

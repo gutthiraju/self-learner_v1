@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java Thread Life Cycle</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #e3f2fd;
+        text-align: center;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #0d47a1;
+        margin-bottom: 30px;
+      }
+
+      .lifecycle-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .state {
+        background-color: #ffffff;
+        border: 2px solid #90caf9;
+        border-radius: 12px;
+        padding: 10px 20px;
+        margin: 15px 0;
+        width: 200px;
+        font-weight: bold;
+        color: #1565c0;
+        position: relative;
+        opacity: 0.4;
+        transition: all 0.4s ease;
+      }
+
+      .state.active {
+        background-color: #bbdefb;
+        opacity: 1;
+        transform: scale(1.1);
+      }
+
+      .arrow {
+        width: 40px;
+        height: 40px;
+        border-left: 3px solid #1565c0;
+        border-bottom: 3px solid #1565c0;
+        transform: rotate(-45deg);
+        margin: 10px;
+      }
+
+      button {
+        margin-top: 30px;
+        padding: 10px 25px;
+        background-color: #1565c0;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0d47a1;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java Thread Life Cycle</h2>
+
+    <div class="lifecycle-container" id="lifecycle">
+      <div class="state" id="new">NEW</div>
+      <div class="arrow"></div>
+      <div class="state" id="runnable">RUNNABLE</div>
+      <div class="arrow"></div>
+      <div class="state" id="running">RUNNING</div>
+      <div class="arrow"></div>
+      <div class="state" id="waiting">WAITING / BLOCKED</div>
+      <div class="arrow"></div>
+      <div class="state" id="terminated">TERMINATED</div>
+    </div>
+
+    <button onclick="startCycle()">Start Life Cycle</button>
+
+    <script>
+      const states = ["new", "runnable", "running", "waiting", "terminated"];
+
+      function startCycle() {
+        let index = 0;
+        states.forEach((id) => {
+          document.getElementById(id).classList.remove("active");
+        });
+
+        function activateNext() {
+          if (index < states.length) {
+            const id = states[index];
+            document.getElementById(id).classList.add("active");
+            index++;
+            setTimeout(activateNext, 1000); // Delay between transitions
+          }
+        }
+
+        activateNext();
+      }
+    </script>
+  </body>
+</html>

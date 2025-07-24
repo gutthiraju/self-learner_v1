@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Break & Continue Animation</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #fffbe6;
+        padding: 20px;
+      }
+      .line {
+        margin: 6px 0;
+      }
+      .highlight {
+        background: #d2f4c4;
+        padding: 3px;
+        border-radius: 4px;
+      }
+      .output {
+        font-weight: bold;
+        margin-top: 15px;
+      }
+      button {
+        padding: 5px 10px;
+        margin-right: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>`break` and `continue` in Java</h2>
+
+    <h3>Break Example:</h3>
+    <div id="b1" class="line">for (int i = 1; i <= 5; i++) {</div>
+    <div id="b2" class="line">if (i == 3) break;</div>
+    <div id="b3" class="line">System.out.println(i);</div>
+    <div class="line">}</div>
+    <button onclick="runBreak()">Run `break`</button>
+    <div class="output" id="breakResult"></div>
+
+    <hr />
+
+    <h3>Continue Example:</h3>
+    <div id="c1" class="line">for (int i = 1; i <= 5; i++) {</div>
+    <div id="c2" class="line">if (i == 3) continue;</div>
+    <div id="c3" class="line">System.out.println(i);</div>
+    <div class="line">}</div>
+    <button onclick="runContinue()">Run `continue`</button>
+    <div class="output" id="continueResult"></div>
+
+    <script>
+      function runBreak() {
+        const code = ["b1", "b2", "b3"];
+        document
+          .querySelectorAll(".line")
+          .forEach((el) => el.classList.remove("highlight"));
+        let i = 1,
+          output = "",
+          step = 0;
+
+        const interval = setInterval(() => {
+          document
+            .querySelectorAll(".line")
+            .forEach((el) => el.classList.remove("highlight"));
+          if (i > 5) {
+            clearInterval(interval);
+            return;
+          }
+
+          document.getElementById(code[0]).classList.add("highlight"); // for loop
+          document.getElementById(code[1]).classList.add("highlight"); // if
+
+          if (i === 3) {
+            output += `i=${i}, break → loop ends<br>`;
+            clearInterval(interval);
+          } else {
+            document.getElementById(code[2]).classList.add("highlight"); // print
+            output += `i=${i}<br>`;
+            i++;
+          }
+
+          document.getElementById("breakResult").innerHTML = output;
+        }, 1000);
+      }
+
+      function runContinue() {
+        const code = ["c1", "c2", "c3"];
+        document
+          .querySelectorAll(".line")
+          .forEach((el) => el.classList.remove("highlight"));
+        let i = 1,
+          output = "";
+
+        const interval = setInterval(() => {
+          if (i > 5) {
+            clearInterval(interval);
+            return;
+          }
+
+          document
+            .querySelectorAll(".line")
+            .forEach((el) => el.classList.remove("highlight"));
+          document.getElementById(code[0]).classList.add("highlight"); // for loop
+          document.getElementById(code[1]).classList.add("highlight"); // if
+
+          if (i === 3) {
+            output += `i=${i}, continue → skip print<br>`;
+            i++;
+          } else {
+            document.getElementById(code[2]).classList.add("highlight"); // print
+            output += `i=${i}<br>`;
+            i++;
+          }
+
+          document.getElementById("continueResult").innerHTML = output;
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

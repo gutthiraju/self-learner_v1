@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TreeMap Animation</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #e3f2fd;
+        padding: 20px;
+        text-align: center;
+      }
+      h2 {
+        color: #1565c0;
+      }
+      #tree {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+        flex-wrap: wrap;
+      }
+      .node {
+        background-color: #64b5f6;
+        color: white;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+        text-align: center;
+        font-weight: bold;
+        margin: 20px;
+        box-shadow: 0 0 10px #1565c0;
+        position: relative;
+        transition: transform 0.5s ease;
+      }
+      .node.inserted {
+        background-color: #81c784;
+      }
+      .node.visited {
+        background-color: #ffb74d;
+      }
+      .level {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0;
+        gap: 10px;
+      }
+      #log {
+        margin-top: 30px;
+        font-family: monospace;
+        font-size: 16px;
+        color: #0d47a1;
+      }
+      button {
+        padding: 10px 20px;
+        background-color: #1565c0;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #0d47a1;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>TreeMap Animation - Sorted Insertion</h2>
+    <button onclick="startAnimation()">▶️ Start TreeMap Animation</button>
+
+    <div id="tree"></div>
+    <div id="log">Click "Start TreeMap Animation" to begin...</div>
+
+    <script>
+      const treeDiv = document.getElementById("tree");
+      const log = document.getElementById("log");
+
+      class TreeNode {
+        constructor(key, value) {
+          this.key = key;
+          this.value = value;
+          this.left = null;
+          this.right = null;
+        }
+      }
+
+      let root = null;
+
+      function insert(node, key, value) {
+        if (!node) return new TreeNode(key, value);
+        if (key < node.key) node.left = insert(node.left, key, value);
+        else if (key > node.key) node.right = insert(node.right, key, value);
+        else node.value = value;
+        return node;
+      }
+
+      async function animateInsert(key, value) {
+        log.textContent = `Inserting key=${key}, value=${value}...`;
+        root = insert(root, key, value);
+        await renderTree();
+        await new Promise((r) => setTimeout(r, 1000));
+      }
+
+      async function renderTree() {
+        treeDiv.innerHTML = "";
+        let levels = [];
+        traverseLevel(root, 0, levels);
+        levels.forEach((level, i) => {
+          const levelDiv = document.createElement("div");
+          levelDiv.className = "level";
+          level.forEach((node) => {
+            const el = document.createElement("div");
+            el.className = "node inserted";
+            el.textContent = `${node.key}`;
+            levelDiv.appendChild(el);
+          });
+          treeDiv.appendChild(levelDiv);
+        });
+      }
+
+      function traverseLevel(node, depth, levels) {
+        if (!node) return;
+        if (!levels[depth]) levels[depth] = [];
+        levels[depth].push(node);
+        traverseLevel(node.left, depth + 1, levels);
+        traverseLevel(node.right, depth + 1, levels);
+      }
+
+      async function startAnimation() {
+        root = null;
+        treeDiv.innerHTML = "";
+        const items = [
+          { key: 50, value: "A" },
+          { key: 30, value: "B" },
+          { key: 70, value: "C" },
+          { key: 20, value: "D" },
+          { key: 40, value: "E" },
+          { key: 60, value: "F" },
+          { key: 80, value: "G" },
+        ];
+
+        for (let item of items) {
+          await animateInsert(item.key, item.value);
+        }
+
+        log.textContent =
+          "All entries inserted in sorted tree structure (BST).";
+      }
+    </script>
+  </body>
+</html>

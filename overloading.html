@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Compile-time Polymorphism</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #e0f7fa;
+        text-align: center;
+        padding: 30px;
+      }
+      .box {
+        border: 3px solid #00796b;
+        background: #b2dfdb;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 15px auto;
+        width: 400px;
+        transition: all 0.5s;
+      }
+      .highlight {
+        background: #4db6ac;
+        box-shadow: 0 0 15px #004d40;
+      }
+      #output {
+        margin-top: 20px;
+        font-size: 18px;
+        background: #004d40;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        min-height: 50px;
+        white-space: pre-line;
+      }
+      button {
+        padding: 12px 20px;
+        background-color: #00796b;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🧮 Compile-time Polymorphism (Method Overloading)</h2>
+
+    <div id="step1" class="box">
+      <code>int add(int a, int b)</code><br />
+      Called as: <code>add(2, 3)</code><br />
+      ➡️ Output: <strong>5</strong>
+    </div>
+
+    <div id="step2" class="box">
+      <code>double add(double a, double b)</code><br />
+      Called as: <code>add(2.5, 3.5)</code><br />
+      ➡️ Output: <strong>6.0</strong>
+    </div>
+
+    <div id="step3" class="box">
+      <code>int add(int a, int b, int c)</code><br />
+      Called as: <code>add(1, 2, 3)</code><br />
+      ➡️ Output: <strong>6</strong>
+    </div>
+
+    <button onclick="runOverload()">▶️ Start Overloading Animation</button>
+    <div id="output">Output:</div>
+
+    <script>
+      function runOverload() {
+        let steps = ["step1", "step2", "step3"];
+        let outputs = ["5", "6.0", "6"];
+        let i = 0;
+
+        steps.forEach((s) =>
+          document.getElementById(s).classList.remove("highlight")
+        );
+        document.getElementById("output").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (i > 0)
+            document.getElementById(steps[i - 1]).classList.remove("highlight");
+          if (i < steps.length) {
+            document.getElementById(steps[i]).classList.add("highlight");
+            document.getElementById("output").innerText += "\n" + outputs[i];
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1600);
+      }
+    </script>
+  </body>
+</html>

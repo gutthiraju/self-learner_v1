@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>ArrayList Methods Animation</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e3f2fd;
+        padding: 30px;
+        text-align: center;
+      }
+      h2 {
+        color: #0d47a1;
+      }
+      .arraylist-container {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 30px 0;
+        min-height: 60px;
+      }
+      .box {
+        width: 50px;
+        height: 50px;
+        background-color: #64b5f6;
+        color: white;
+        border-radius: 8px;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 0 8px #1976d2;
+        transition: background-color 0.5s ease;
+      }
+      .highlight {
+        background-color: #ffca28 !important;
+        color: black !important;
+      }
+      .removed {
+        background-color: #ef5350 !important;
+        text-decoration: line-through;
+        opacity: 0.6;
+      }
+      button {
+        background-color: #1976d2;
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 10px;
+      }
+      button:hover {
+        background-color: #0d47a1;
+      }
+      #log {
+        background-color: #bbdefb;
+        border-radius: 10px;
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 15px;
+        font-family: monospace;
+        font-size: 16px;
+        color: #0d47a1;
+        min-height: 60px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>ArrayList Methods Animation</h2>
+
+    <div class="arraylist-container" id="arraylist"></div>
+
+    <div>
+      <button onclick="addElement()">Add Element</button>
+      <button onclick="removeElement()">Remove Element</button>
+      <button onclick="searchElement()">Search Element</button>
+      <button onclick="sortArrayList()">Sort ArrayList</button>
+    </div>
+
+    <div id="log">Click buttons to perform operations...</div>
+
+    <script>
+      const arraylist = document.getElementById("arraylist");
+      const log = document.getElementById("log");
+
+      // Our ArrayList simulation
+      let arrList = [];
+
+      // Sample elements to add
+      const sampleElements = [42, 23, 16, 15, 8, 4];
+      let addIndex = 0;
+
+      function renderArray() {
+        arraylist.innerHTML = "";
+        arrList.forEach((val, idx) => {
+          const box = document.createElement("div");
+          box.classList.add("box");
+          box.textContent = val;
+          box.id = "box-" + idx;
+          arraylist.appendChild(box);
+        });
+      }
+
+      async function highlightBox(idx, colorClass) {
+        if (idx >= 0 && idx < arrList.length) {
+          const box = document.getElementById("box-" + idx);
+          box.classList.add(colorClass);
+          await delay(1000);
+          box.classList.remove(colorClass);
+        }
+      }
+
+      function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      async function addElement() {
+        if (addIndex >= sampleElements.length) {
+          log.textContent = "No more elements to add!";
+          return;
+        }
+        const val = sampleElements[addIndex];
+        arrList.push(val);
+        log.textContent = `Adding element: ${val}`;
+        renderArray();
+        await highlightBox(arrList.length - 1, "highlight");
+        addIndex++;
+      }
+
+      async function removeElement() {
+        if (arrList.length === 0) {
+          log.textContent = "ArrayList is empty, nothing to remove!";
+          return;
+        }
+        const removeVal = arrList[0];
+        log.textContent = `Removing element at index 0: ${removeVal}`;
+        await highlightBox(0, "removed");
+        arrList.shift(); // remove first element
+        renderArray();
+      }
+
+      async function searchElement() {
+        if (arrList.length === 0) {
+          log.textContent = "ArrayList is empty!";
+          return;
+        }
+        // Let's search for element 15 for demo
+        const target = 15;
+        log.textContent = `Searching for element: ${target}`;
+        for (let i = 0; i < arrList.length; i++) {
+          await highlightBox(i, "highlight");
+          if (arrList[i] === target) {
+            log.textContent = `Element ${target} found at index ${i}`;
+            return;
+          }
+        }
+        log.textContent = `Element ${target} not found`;
+      }
+
+      async function sortArrayList() {
+        if (arrList.length === 0) {
+          log.textContent = "ArrayList is empty, nothing to sort!";
+          return;
+        }
+        log.textContent = "Sorting ArrayList...";
+        await delay(1000);
+        arrList.sort((a, b) => a - b);
+        renderArray();
+        log.textContent = "ArrayList sorted: " + arrList.join(", ");
+      }
+
+      // Initial render
+      renderArray();
+    </script>
+  </body>
+</html>

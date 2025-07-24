@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java Exception Handling Animation</title>
+    <style>
+      body {
+        background: #fff8e1;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 30px;
+      }
+      .code-block {
+        background: #ffe082;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: left;
+        font-family: "Courier New", Courier, monospace;
+        max-width: 600px;
+        margin: auto;
+        font-size: 16px;
+        white-space: pre-wrap;
+      }
+      .highlight {
+        background-color: #ff7043;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .output {
+        background: #dcedc8;
+        padding: 15px;
+        margin-top: 20px;
+        border-radius: 10px;
+        font-size: 18px;
+        color: #33691e;
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        background-color: #f57c00;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>💥 Java Exception Handling Animation</h2>
+
+    <div class="code-block" id="codeDisplay">
+      <span>try {</span><br />
+      &nbsp;&nbsp;<span id="line1">int a = 5 / 0;</span><br />
+      <span>} catch (ArithmeticException e) {</span><br />
+      &nbsp;&nbsp;<span id="line2"
+        >System.out.println("Caught an Arithmetic Exception");</span
+      ><br />
+      <span>} finally {</span><br />
+      &nbsp;&nbsp;<span id="line3"
+        >System.out.println("This block always runs.");</span
+      ><br />
+      <span>}</span>
+    </div>
+
+    <button onclick="runSimulation()">▶️ Run Simulation</button>
+    <div class="output" id="outputBox">Output will appear here...</div>
+
+    <script>
+      function highlightLine(id) {
+        document
+          .querySelectorAll("span")
+          .forEach((el) => el.classList.remove("highlight"));
+        document.getElementById(id).classList.add("highlight");
+      }
+
+      async function runSimulation() {
+        const output = document.getElementById("outputBox");
+        output.innerText = "Running code...";
+        highlightLine("line1");
+        await delay(1500);
+
+        output.innerText = "💥 Exception occurred: Division by 0";
+        highlightLine("line2");
+        await delay(1500);
+
+        output.innerText += "\n🛑 Caught an Arithmetic Exception";
+        highlightLine("line3");
+        await delay(1500);
+
+        output.innerText += "\n✅ Finally block executed.";
+        document
+          .querySelectorAll("span")
+          .forEach((el) => el.classList.remove("highlight"));
+      }
+
+      function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+    </script>
+  </body>
+</html>

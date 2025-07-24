@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Recursion Visualization</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #f0fff0;
+        padding: 20px;
+      }
+
+      .call {
+        border: 2px dashed #333;
+        border-radius: 10px;
+        margin: 10px 0;
+        padding: 12px;
+        background-color: #fff3cd;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .highlight {
+        border: 4px solid #000;
+        box-shadow: 0 0 10px #555;
+      }
+
+      .output {
+        background: #222;
+        color: #0f0;
+        padding: 10px;
+        border-radius: 6px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      button {
+        background: #ff5722;
+        color: white;
+        padding: 10px 20px;
+        font-weight: bold;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🔁 Java Recursion: Factorial of 4</h2>
+
+    <div id="step1" class="call">factorial(4) → 4 × factorial(3)</div>
+    <div id="step2" class="call">factorial(3) → 3 × factorial(2)</div>
+    <div id="step3" class="call">factorial(2) → 2 × factorial(1)</div>
+    <div id="step4" class="call">factorial(1) → 1 (base case)</div>
+    <div id="step5" class="call">factorial(2) returns 2 × 1 = 2</div>
+    <div id="step6" class="call">factorial(3) returns 3 × 2 = 6</div>
+    <div id="step7" class="call">factorial(4) returns 4 × 6 = 24</div>
+
+    <button onclick="run()">▶️ Run Recursion Animation</button>
+
+    <div class="output" id="output">Output:</div>
+
+    <script>
+      function run() {
+        const ids = [
+          "step1",
+          "step2",
+          "step3",
+          "step4",
+          "step5",
+          "step6",
+          "step7",
+        ];
+        const outputs = ["", "", "", "", "2", "6", "24"];
+        let i = 0;
+
+        ids.forEach((id) =>
+          document.getElementById(id).classList.remove("highlight")
+        );
+        document.getElementById("output").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (i > 0) {
+            document.getElementById(ids[i - 1]).classList.remove("highlight");
+          }
+
+          if (i < ids.length) {
+            document.getElementById(ids[i]).classList.add("highlight");
+            if (outputs[i]) {
+              document.getElementById(
+                "output"
+              ).innerText += `\nReturn: ${outputs[i]}`;
+            }
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1300);
+      }
+    </script>
+  </body>
+</html>

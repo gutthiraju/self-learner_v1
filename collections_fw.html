@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java Collections Framework Animation</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e8f5e9;
+        padding: 30px;
+        text-align: center;
+      }
+      h2 {
+        color: #2e7d32;
+      }
+      .collection-box {
+        background-color: #a5d6a7;
+        border-radius: 12px;
+        width: 300px;
+        margin: 20px auto;
+        padding: 20px;
+        box-shadow: 0 0 10px #81c784;
+        font-family: monospace;
+        font-size: 16px;
+        color: #1b5e20;
+        min-height: 80px;
+        position: relative;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #388e3c;
+        padding-bottom: 5px;
+      }
+      .items {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .item {
+        background-color: #66bb6a;
+        border-radius: 6px;
+        padding: 8px 14px;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 0 5px #388e3c;
+        transition: background-color 0.3s ease;
+      }
+      .highlight {
+        background-color: #fbc02d !important;
+        color: black !important;
+        font-weight: bolder !important;
+      }
+      button {
+        margin-top: 25px;
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #1b5e20;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🌿 Java Collections Framework Animation</h2>
+
+    <div class="collection-box" id="listBox">
+      <div class="title">List (ArrayList)</div>
+      <div class="items" id="listItems"></div>
+    </div>
+
+    <div class="collection-box" id="setBox">
+      <div class="title">Set (HashSet)</div>
+      <div class="items" id="setItems"></div>
+    </div>
+
+    <div class="collection-box" id="mapBox">
+      <div class="title">Map (HashMap)</div>
+      <div class="items" id="mapItems"></div>
+    </div>
+
+    <button onclick="runAnimation()">▶️ Run Collections Animation</button>
+
+    <script>
+      const listItems = document.getElementById("listItems");
+      const setItems = document.getElementById("setItems");
+      const mapItems = document.getElementById("mapItems");
+
+      const fruits = [];
+      const colors = new Set();
+      const students = new Map();
+
+      function createItem(text) {
+        const div = document.createElement("div");
+        div.className = "item";
+        div.textContent = text;
+        return div;
+      }
+
+      async function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      async function runAnimation() {
+        // Clear boxes
+        listItems.innerHTML = "";
+        setItems.innerHTML = "";
+        mapItems.innerHTML = "";
+
+        // Animate List (ArrayList)
+        await delay(500);
+        fruits.push("Apple");
+        listItems.appendChild(createItem("Apple"));
+        await delay(1000);
+
+        fruits.push("Banana");
+        listItems.appendChild(createItem("Banana"));
+        await delay(1000);
+
+        fruits.push("Apple (duplicate)");
+        const appleDup = createItem("Apple");
+        appleDup.style.opacity = "0.6";
+        listItems.appendChild(appleDup);
+        await delay(1500);
+
+        // Animate Set (HashSet)
+        colors.add("Red");
+        setItems.appendChild(createItem("Red"));
+        await delay(1000);
+
+        colors.add("Green");
+        setItems.appendChild(createItem("Green"));
+        await delay(1000);
+
+        const addRedAgain = "Red (duplicate)";
+
+        // Try to add Red again
+        if (colors.has("Red")) {
+          const dup = createItem(addRedAgain);
+          dup.style.backgroundColor = "#ef5350"; // red shade for duplicate rejected
+          dup.style.color = "#fff";
+          dup.title = "Duplicate ignored";
+          setItems.appendChild(dup);
+        }
+        await delay(1500);
+
+        // Animate Map (HashMap)
+        students.set(101, "Alice");
+        mapItems.appendChild(createItem("101 → Alice"));
+        await delay(1000);
+
+        students.set(102, "Bob");
+        mapItems.appendChild(createItem("102 → Bob"));
+        await delay(1000);
+
+        // Key 101 replaced with Charlie
+        students.set(101, "Charlie");
+        const replaced = createItem("101 → Charlie (replaced)");
+        replaced.style.backgroundColor = "#ffd54f";
+        replaced.style.color = "#3e2723";
+        mapItems.appendChild(replaced);
+        await delay(1500);
+      }
+    </script>
+  </body>
+</html>

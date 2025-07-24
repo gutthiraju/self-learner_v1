@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Method Declaration & Calling</title>
+    <style>
+      body {
+        background: #f0f0ff;
+        font-family: "Courier New", monospace;
+        padding: 20px;
+      }
+      .step-box {
+        padding: 12px;
+        border-radius: 10px;
+        margin: 10px 0;
+        transition: all 0.3s ease-in-out;
+        border: 2px solid #ccc;
+      }
+      .declare {
+        background: #e3f2fd;
+        border-color: #2196f3;
+      }
+      .main {
+        background: #fff3cd;
+        border-color: #ffc107;
+      }
+      .call {
+        background: #d4edda;
+        border-color: #28a745;
+      }
+      .run {
+        background: #f8d7da;
+        border-color: #dc3545;
+      }
+      .highlight {
+        border-width: 4px;
+        box-shadow: 0 0 10px #555;
+      }
+
+      .output {
+        background: #222;
+        color: #0f0;
+        padding: 10px;
+        margin-top: 20px;
+        border-radius: 8px;
+        font-weight: bold;
+      }
+
+      button {
+        background: #673ab7;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>📘 Java Method Declaration & Calling</h2>
+
+    <div id="s1" class="step-box declare">
+      1️⃣ Method Declared: <br />
+      <code>static void sayHello()</code>
+    </div>
+    <div id="s2" class="step-box main">2️⃣ `main()` starts</div>
+    <div id="s3" class="step-box call">
+      3️⃣ Method Called: <br />
+      <code>sayHello();</code>
+    </div>
+    <div id="s4" class="step-box run">4️⃣ Method Runs: Prints "Hello!"</div>
+
+    <button onclick="runSteps()">▶️ Run Animation</button>
+
+    <div class="output" id="output">Output:</div>
+
+    <script>
+      function runSteps() {
+        const ids = ["s1", "s2", "s3", "s4"];
+        const outputLines = ["", "", "", "Hello!"];
+        let index = 0;
+
+        ids.forEach((id) =>
+          document.getElementById(id).classList.remove("highlight")
+        );
+        document.getElementById("output").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (index > 0) {
+            document
+              .getElementById(ids[index - 1])
+              .classList.remove("highlight");
+          }
+          if (index < ids.length) {
+            document.getElementById(ids[index]).classList.add("highlight");
+            if (outputLines[index]) {
+              document.getElementById("output").innerText +=
+                "\n" + outputLines[index];
+            }
+            index++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1200);
+      }
+    </script>
+  </body>
+</html>

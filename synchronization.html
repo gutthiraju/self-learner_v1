@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java Synchronization</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f3faff;
+        text-align: center;
+        padding: 20px;
+      }
+
+      h2 {
+        color: #0d47a1;
+        margin-bottom: 30px;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        margin-top: 50px;
+      }
+
+      .thread {
+        width: 100px;
+        height: 100px;
+        background-color: #81c784;
+        color: white;
+        line-height: 100px;
+        font-weight: bold;
+        border-radius: 50%;
+        position: relative;
+      }
+
+      .lock {
+        width: 150px;
+        height: 120px;
+        background-color: #eeeeee;
+        border: 2px dashed #90a4ae;
+        border-radius: 10px;
+        position: relative;
+        padding-top: 10px;
+      }
+
+      .lock-title {
+        font-size: 14px;
+        color: #455a64;
+      }
+
+      .move {
+        animation: accessLock 3s forwards;
+      }
+
+      @keyframes accessLock {
+        0% {
+          left: 0;
+          top: 0;
+        }
+        50% {
+          left: 180px;
+          top: 0;
+        }
+        100% {
+          left: 180px;
+          top: 0;
+          background-color: #4caf50;
+        }
+      }
+
+      button {
+        margin-top: 40px;
+        padding: 10px 25px;
+        background-color: #1565c0;
+        color: white;
+        border: none;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #0d47a1;
+      }
+
+      code {
+        background-color: #eeeeee;
+        display: block;
+        text-align: left;
+        padding: 10px;
+        border-radius: 6px;
+        font-size: 13px;
+        margin-top: 20px;
+        white-space: pre-wrap;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java Synchronization: Preventing Race Conditions</h2>
+
+    <div class="container">
+      <div class="thread" id="thread1">T1</div>
+      <div class="lock" id="lockBox">
+        <div class="lock-title">Synchronized Block</div>
+      </div>
+      <div class="thread" id="thread2">T2</div>
+    </div>
+
+    <button onclick="startSync()">Start Threads</button>
+
+    <code>
+      class SharedResource { synchronized void printCount() { for(int i=1;
+      i&lt;=5; i++) { System.out.println(Thread.currentThread().getName() + ": "
+      + i); } } } class MyThread extends Thread { SharedResource resource;
+      MyThread(SharedResource r) { resource = r; } public void run() {
+      resource.printCount(); } } SharedResource obj = new SharedResource();
+      MyThread t1 = new MyThread(obj); MyThread t2 = new MyThread(obj);
+      t1.start(); t2.start();
+    </code>
+
+    <script>
+      function startSync() {
+        const t1 = document.getElementById("thread1");
+        const t2 = document.getElementById("thread2");
+
+        t1.style.left = "0";
+        t2.style.left = "0";
+        t1.classList.remove("move");
+        t2.classList.remove("move");
+
+        void t1.offsetWidth;
+        void t2.offsetWidth;
+
+        t1.classList.add("move");
+
+        // Simulate that T2 waits until T1 completes
+        setTimeout(() => {
+          t2.classList.add("move");
+        }, 3500);
+      }
+    </script>
+  </body>
+</html>

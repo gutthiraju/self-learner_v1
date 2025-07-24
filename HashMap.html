@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HashMap Internals Animation</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #e8f5e9;
+        padding: 30px;
+        text-align: center;
+      }
+      h2 {
+        color: #2e7d32;
+      }
+      .hashmap-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin: 40px 0;
+      }
+      .bucket {
+        width: 140px;
+        min-height: 140px;
+        background-color: #a5d6a7;
+        border-radius: 12px;
+        box-shadow: 0 0 10px #66bb6a;
+        padding: 10px;
+        position: relative;
+      }
+      .bucket-title {
+        font-weight: bold;
+        color: #1b5e20;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #388e3c;
+        padding-bottom: 4px;
+      }
+      .entry {
+        width: 120px;
+        height: 45px;
+        background-color: #66bb6a;
+        color: white;
+        border-radius: 8px;
+        margin: 5px auto;
+        line-height: 45px;
+        font-weight: bold;
+        box-shadow: 0 0 8px #2e7d32;
+        transition: background-color 0.5s ease;
+        position: relative;
+      }
+      .highlight {
+        background-color: #aed581 !important;
+        color: black !important;
+        font-weight: bolder !important;
+        box-shadow: 0 0 14px #9ccc65 !important;
+      }
+      .updated {
+        background-color: #ffb74d !important;
+        color: black !important;
+        font-weight: bolder !important;
+        box-shadow: 0 0 14px #f57c00 !important;
+      }
+      button {
+        background-color: #2e7d32;
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color: #1b5e20;
+      }
+      #log {
+        background-color: #c8e6c9;
+        border-radius: 10px;
+        max-width: 700px;
+        margin: 30px auto;
+        padding: 15px;
+        font-family: monospace;
+        font-size: 16px;
+        color: #2e7d32;
+        min-height: 60px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>HashMap Internals Animation</h2>
+
+    <div class="hashmap-container">
+      <div class="bucket" id="bucket0">
+        <div class="bucket-title">Bucket 0</div>
+      </div>
+      <div class="bucket" id="bucket1">
+        <div class="bucket-title">Bucket 1</div>
+      </div>
+      <div class="bucket" id="bucket2">
+        <div class="bucket-title">Bucket 2</div>
+      </div>
+      <div class="bucket" id="bucket3">
+        <div class="bucket-title">Bucket 3</div>
+      </div>
+      <div class="bucket" id="bucket4">
+        <div class="bucket-title">Bucket 4</div>
+      </div>
+    </div>
+
+    <button onclick="runHashMapAnimation()">▶️ Run HashMap Animation</button>
+
+    <div id="log">Click the button to start animation...</div>
+
+    <script>
+      const buckets = [
+        document.getElementById("bucket0"),
+        document.getElementById("bucket1"),
+        document.getElementById("bucket2"),
+        document.getElementById("bucket3"),
+        document.getElementById("bucket4"),
+      ];
+      const log = document.getElementById("log");
+
+      // Simple hash function (key string length modulo bucket count)
+      function hash(key) {
+        return key.length % 5;
+      }
+
+      // Internal map for bucket entries: arrays of {key, value, elementDiv}
+      const mapBuckets = [[], [], [], [], []];
+
+      async function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      async function highlightEntry(el, className = "highlight") {
+        el.classList.add(className);
+        await delay(1200);
+        el.classList.remove(className);
+      }
+
+      async function runHashMapAnimation() {
+        // Reset buckets and log
+        mapBuckets.forEach((arr) => {
+          arr.forEach((entry) => {
+            if (entry.elementDiv) entry.elementDiv.remove();
+          });
+          arr.length = 0;
+        });
+        buckets.forEach((bucket) =>
+          bucket.querySelectorAll(".entry").forEach((e) => e.remove())
+        );
+        log.textContent = "Starting HashMap Animation...";
+
+        // Entries to add (some keys have same hash -> collision)
+        const entries = [
+          { key: "One", value: 1 },
+          { key: "Two", value: 2 },
+          { key: "Three", value: 3 },
+          { key: "Four", value: 4 },
+          { key: "Five", value: 5 },
+          { key: "Two", value: 22 }, // Updating value for existing key "Two"
+        ];
+
+        for (let entry of entries) {
+          const bucketIndex = hash(entry.key);
+          log.textContent = `Adding key="${entry.key}", value=${entry.value} → Hash: ${bucketIndex}`;
+
+          // Check if key already exists in bucket (update)
+          let existingEntry = mapBuckets[bucketIndex].find(
+            (e) => e.key === entry.key
+          );
+          if (existingEntry) {
+            log.textContent = `Key "${entry.key}" found in bucket ${bucketIndex}, updating value from ${existingEntry.value} to ${entry.value}`;
+            existingEntry.value = entry.value;
+            // Update displayed value
+            existingEntry.elementDiv.textContent = `${entry.key} : ${entry.value}`;
+            await highlightEntry(existingEntry.elementDiv, "updated");
+          } else {
+            // Create new entry div
+            const el = document.createElement("div");
+            el.textContent = `${entry.key} : ${entry.value}`;
+            el.classList.add("entry");
+            buckets[bucketIndex].appendChild(el);
+
+            // Save entry
+            mapBuckets[bucketIndex].push({
+              key: entry.key,
+              value: entry.value,
+              elementDiv: el,
+            });
+            await highlightEntry(el);
+          }
+        }
+
+        log.textContent =
+          "Animation complete! HashMap stores key-value pairs with collision handled by chaining.";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Topics | Python Learning</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #e3f2fd, #f1f8e9);
+        padding: 20px;
+      }
+
+      nav {
+        background-color: #2e7d32;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+      }
+
+      nav h1 {
+        color: white;
+        font-size: 2rem;
+      }
+
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .topic-box {
+        background-color: #1976d2;
+        border-radius: 12px;
+        padding: 15px 20px;
+        text-align: center;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .topic-box:hover {
+        transform: translateY(-5px);
+        background-color: #1565c0;
+      }
+
+      .topic-box a {
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        display: block;
+        font-size: 1rem;
+      }
+
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #777;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 600px) {
+        nav h1 {
+          font-size: 1.5rem;
+        }
+
+        .topic-box a {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>Python Topics for Students</h1>
+    </nav>
+
+    <section>
+      <div class="topic-box">
+        <a href="intro.html">Introduction to Python</a>
+      </div>
+      <div class="topic-box">
+        <a href="variables.html">Variables & Data Types</a>
+      </div>
+      <div class="topic-box">
+        <a href="input_output.html">Input & Output</a>
+      </div>
+      <div class="topic-box"><a href="operators.html">Operators</a></div>
+      <div class="topic-box">
+        <a href="conditionals.html">Conditional Statements</a>
+      </div>
+      <div class="topic-box"><a href="loops.html">Loops (for & while)</a></div>
+      <div class="topic-box"><a href="functions.html">Functions</a></div>
+      <div class="topic-box"><a href="recursion.html">Recursion</a></div>
+      <div class="topic-box"><a href="lists.html">Lists</a></div>
+      <div class="topic-box"><a href="tuples.html">Tuples</a></div>
+      <div class="topic-box"><a href="sets.html">Sets</a></div>
+      <div class="topic-box"><a href="dictionaries.html">Dictionaries</a></div>
+      <div class="topic-box"><a href="strings.html">String Methods</a></div>
+      <div class="topic-box">
+        <a href="file_handling.html">File Handling</a>
+      </div>
+      <div class="topic-box">
+        <a href="exception.html">Exception Handling</a>
+      </div>
+      <div class="topic-box">
+        <a href="oop.html">OOP - Classes & Objects</a>
+      </div>
+      <div class="topic-box"><a href="inheritance.html">Inheritance</a></div>
+      <div class="topic-box"><a href="polymorphism.html">Polymorphism</a></div>
+      <div class="topic-box"><a href="abstraction.html">Abstraction</a></div>
+      <div class="topic-box">
+        <a href="encapsulation.html">Encapsulation</a>
+      </div>
+      <div class="topic-box"><a href="modules.html">Modules & Packages</a></div>
+      <div class="topic-box"><a href="lambda.html">Lambda Functions</a></div>
+      <div class="topic-box">
+        <a href="comprehensions.html">List/Dic Comprehensions</a>
+      </div>
+      <div class="topic-box"><a href="decorators.html">Decorators</a></div>
+      <div class="topic-box"><a href="generators.html">Generators</a></div>
+      <div class="topic-box">
+        <a href="multithreading.html">Multithreading</a>
+      </div>
+      <div class="topic-box"><a href="database.html">Python with MySQL</a></div>
+      <div class="topic-box"><a href="gui.html">GUI with Tkinter</a></div>
+      <div class="topic-box"><a href="project.html">Mini Projects</a></div>
+    </section>
+
+    <footer>
+      <p>© 2025 Student Python Learning Platform | Learn & Practice</p>
+    </footer>
+  </body>
+</html>

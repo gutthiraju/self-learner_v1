@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java Multithreading Animation</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f0f8ff;
+        padding: 30px;
+        text-align: center;
+      }
+
+      h2 {
+        color: #0d47a1;
+      }
+
+      .thread-container {
+        margin-top: 40px;
+      }
+
+      .thread {
+        background-color: #64b5f6;
+        border-radius: 20px;
+        height: 40px;
+        margin: 20px auto;
+        width: 80%;
+        position: relative;
+      }
+
+      .task {
+        position: absolute;
+        height: 40px;
+        width: 60px;
+        background-color: #81c784;
+        border-radius: 20px;
+        text-align: center;
+        line-height: 40px;
+        font-weight: bold;
+        color: white;
+        animation-timing-function: linear;
+      }
+
+      .running {
+        animation-name: move;
+        animation-duration: 5s;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes move {
+        0% {
+          left: 0;
+        }
+        100% {
+          left: 92%;
+        }
+      }
+
+      .label {
+        font-weight: bold;
+        margin-top: 10px;
+        font-size: 16px;
+        color: #0d47a1;
+      }
+
+      button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #0d47a1;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #002171;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java Multithreading Visualization</h2>
+    <p>Each thread runs independently and executes tasks in parallel.</p>
+
+    <div class="thread-container">
+      <div class="label">Thread 1 (extends Thread)</div>
+      <div class="thread">
+        <div class="task" id="task1">T1</div>
+      </div>
+
+      <div class="label">Thread 2 (implements Runnable)</div>
+      <div class="thread">
+        <div class="task" id="task2">T2</div>
+      </div>
+
+      <div class="label">Thread 3 (Anonymous Runnable)</div>
+      <div class="thread">
+        <div class="task" id="task3">T3</div>
+      </div>
+    </div>
+
+    <button onclick="startThreads()">▶️ Start Threads</button>
+
+    <script>
+      function startThreads() {
+        const t1 = document.getElementById("task1");
+        const t2 = document.getElementById("task2");
+        const t3 = document.getElementById("task3");
+
+        t1.classList.add("running");
+        setTimeout(() => t2.classList.add("running"), 500); // Delayed start
+        setTimeout(() => t3.classList.add("running"), 1000); // Delayed start
+      }
+    </script>
+  </body>
+</html>

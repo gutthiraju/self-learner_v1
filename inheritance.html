@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Inheritance Animation</title>
+    <style>
+      body {
+        background-color: #f0f4c3;
+        font-family: monospace;
+        text-align: center;
+        padding: 30px;
+      }
+      .class-box {
+        border: 3px solid #33691e;
+        background-color: #aed581;
+        border-radius: 15px;
+        width: 300px;
+        margin: 20px auto;
+        padding: 20px;
+        transition: all 0.5s;
+      }
+      .highlight {
+        box-shadow: 0 0 15px 5px #1b5e20;
+        background-color: #dcedc8 !important;
+      }
+      #arrow {
+        font-size: 40px;
+        margin: 10px 0;
+        color: #33691e;
+      }
+      button {
+        background: #558b2f;
+        color: white;
+        font-size: 16px;
+        padding: 12px 24px;
+        border: none;
+        border-radius: 8px;
+        margin-top: 20px;
+        cursor: pointer;
+      }
+      #output {
+        margin-top: 30px;
+        background: #1b5e20;
+        color: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 18px;
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🐶 Java Inheritance Animation</h2>
+
+    <div id="animal" class="class-box">
+      <strong>Class: Animal</strong><br /><br />
+      Method: <code>eat()</code><br />
+      Output: "I can eat"
+    </div>
+
+    <div id="arrow">⬇️</div>
+
+    <div id="dog" class="class-box">
+      <strong>Class: Dog <br />(extends Animal)</strong><br /><br />
+      Method: <code>bark()</code><br />
+      Output: "I can bark"
+    </div>
+
+    <button onclick="start()">▶️ Start Animation</button>
+
+    <div id="output">Output:</div>
+
+    <script>
+      function start() {
+        const steps = [
+          { id: "animal", msg: "I can eat" },
+          { id: "dog", msg: "I can bark" },
+        ];
+        let i = 0;
+
+        steps.forEach((step) =>
+          document.getElementById(step.id).classList.remove("highlight")
+        );
+        document.getElementById("output").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (i > 0)
+            document
+              .getElementById(steps[i - 1].id)
+              .classList.remove("highlight");
+          if (i < steps.length) {
+            document.getElementById(steps[i].id).classList.add("highlight");
+            document.getElementById("output").innerText += "\n" + steps[i].msg;
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1600);
+      }
+    </script>
+  </body>
+</html>

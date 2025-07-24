@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interface Animation</title>
+    <style>
+      body {
+        font-family: monospace;
+        background-color: #e3f2fd;
+        padding: 30px;
+        text-align: center;
+      }
+      .box {
+        background-color: #90caf9;
+        border: 3px solid #1976d2;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 20px auto;
+        width: 420px;
+        transition: all 0.4s ease-in-out;
+      }
+      .highlight {
+        background-color: #64b5f6;
+        box-shadow: 0 0 15px #1565c0;
+      }
+      #output {
+        background: #1565c0;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 18px;
+        white-space: pre-line;
+        margin-top: 20px;
+      }
+      button {
+        background: #1976d2;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🧬 Interface Animation</h2>
+
+    <div id="step1" class="box">
+      <strong>interface Animal</strong><br />
+      Method: <code>void sound()</code>
+    </div>
+
+    <div id="step2" class="box">
+      <strong>class Cat implements Animal</strong><br />
+      Defines: <code>sound() → "Meow"</code>
+    </div>
+
+    <div id="step3" class="box">
+      <code>Animal a = new Cat();</code><br />
+      Calls: <code>a.sound()</code>
+    </div>
+
+    <button onclick="runInterface()">▶️ Run Interface Animation</button>
+    <div id="output">Output:</div>
+
+    <script>
+      function runInterface() {
+        const steps = ["step1", "step2", "step3"];
+        const outputs = ["", "", "Meow"];
+        let i = 0;
+
+        steps.forEach((s) =>
+          document.getElementById(s).classList.remove("highlight")
+        );
+        document.getElementById("output").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (i > 0)
+            document.getElementById(steps[i - 1]).classList.remove("highlight");
+          if (i < steps.length) {
+            document.getElementById(steps[i]).classList.add("highlight");
+            if (outputs[i]) {
+              document.getElementById("output").innerText += "\n" + outputs[i];
+            }
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1800);
+      }
+    </script>
+  </body>
+</html>

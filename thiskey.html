@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Java this Keyword Animation</title>
+    <style>
+      body {
+        background: #ede7f6;
+        font-family: monospace;
+        padding: 20px;
+      }
+      .box {
+        border: 3px solid #512da8;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px auto;
+        width: 350px;
+        text-align: center;
+        background-color: #d1c4e9;
+        transition: box-shadow 0.5s;
+      }
+      .highlight {
+        box-shadow: 0 0 15px 5px #311b92;
+        background-color: #b39ddb !important;
+      }
+      button {
+        background: #512da8;
+        color: white;
+        padding: 12px 22px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      #output {
+        background: #311b92;
+        color: #ede7f6;
+        padding: 15px;
+        border-radius: 6px;
+        margin-top: 20px;
+        white-space: pre-line;
+        min-height: 60px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java `this` Keyword: Step-by-Step Animation</h2>
+
+    <div id="step1" class="box">
+      Constructor Parameters:<br />
+      <code>Car(String brand, int speed)</code><br />
+      <br />
+      Instance Variables:<br />
+      <code>this.brand</code>, <code>this.speed</code>
+    </div>
+
+    <div id="step2" class="box">
+      Assigning Values:<br />
+      <code>this.brand = brand;</code><br />
+      <code>this.speed = speed;</code>
+    </div>
+
+    <div id="step3" class="box">
+      Object Created:<br />
+      <code>Car myCar = new Car("Tesla", 180);</code><br />
+      <br />
+      <strong>this</strong> refers to the <em>current object</em>.
+    </div>
+
+    <button onclick="startAnimation()">▶️ Start Animation</button>
+
+    <div id="output">Output:</div>
+
+    <script>
+      function startAnimation() {
+        const steps = ["step1", "step2", "step3"];
+        const messages = ["", "", "Brand: Tesla\nSpeed: 180 km/h"];
+        let i = 0;
+
+        steps.forEach((id) =>
+          document.getElementById(id).classList.remove("highlight")
+        );
+        document.getElementById("output").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (i > 0)
+            document.getElementById(steps[i - 1]).classList.remove("highlight");
+          if (i < steps.length) {
+            document.getElementById(steps[i]).classList.add("highlight");
+            if (messages[i]) {
+              document.getElementById("output").innerText += "\n" + messages[i];
+            }
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1500);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Java Operators Visualization</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #eef;
+        padding: 20px;
+      }
+      .line {
+        margin: 8px 0;
+      }
+      .highlight {
+        background: #c0f0d0;
+        padding: 4px;
+        border-radius: 5px;
+      }
+      .output {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Operators Demo</h2>
+    <div class="line" id="l1">int a = 10, b = 5;</div>
+    <div class="line" id="l2">Addition: a + b</div>
+    <div class="line" id="l3">Subtraction: a - b</div>
+    <div class="line" id="l4">Multiplication: a * b</div>
+    <div class="line" id="l5">Division: a / b</div>
+    <div class="line" id="l6">Modulus: a % b</div>
+    <div class="line" id="l7">Comparison: a == b</div>
+    <div class="line" id="l8">Comparison: a > b</div>
+    <div class="line" id="l9">Logical AND: a > b && b > 0</div>
+
+    <div class="output" id="out"></div>
+
+    <script>
+      const lines = [
+        { id: "l1", out: "" },
+        { id: "l2", out: "Addition: 15" },
+        { id: "l3", out: "Subtraction: 5" },
+        { id: "l4", out: "Multiplication: 50" },
+        { id: "l5", out: "Division: 2" },
+        { id: "l6", out: "Modulus: 0" },
+        { id: "l7", out: "a == b: false" },
+        { id: "l8", out: "a > b: true" },
+        { id: "l9", out: "(a > b) && (b > 0): true" },
+      ];
+
+      let i = 0;
+
+      function showStep() {
+        if (i > 0) {
+          document
+            .getElementById(lines[i - 1].id)
+            .classList.remove("highlight");
+        }
+
+        if (i < lines.length) {
+          const l = lines[i];
+          document.getElementById(l.id).classList.add("highlight");
+          if (l.out !== "") {
+            document.getElementById("out").innerHTML += l.out + "<br>";
+          }
+          i++;
+        } else {
+          clearInterval(step);
+        }
+      }
+
+      const step = setInterval(showStep, 1500);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java String Methods Animation</title>
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #ede7f6;
+        text-align: center;
+        padding: 40px;
+      }
+      .string-box {
+        font-size: 24px;
+        background-color: #7e57c2;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        display: inline-block;
+        margin-bottom: 30px;
+      }
+      .highlight {
+        background-color: #ffca28;
+        color: black;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .output {
+        background: #d1c4e9;
+        padding: 20px;
+        border-radius: 10px;
+        margin-top: 20px;
+        font-size: 18px;
+        min-height: 60px;
+        white-space: pre-wrap;
+      }
+      button {
+        margin: 5px;
+        padding: 10px 20px;
+        background: #5e35b1;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      button:hover {
+        background: #512da8;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🎨 Java String Methods Animation</h2>
+    <div class="string-box" id="stringDisplay">Hello Java</div>
+
+    <div>
+      <button onclick="getLength()">📏 Length</button>
+      <button onclick="charAt()">🔡 charAt(1)</button>
+      <button onclick="substring()">🔍 substring(0,5)</button>
+      <button onclick="toUpper()">⬆️ toUpperCase()</button>
+      <button onclick="equals()">🤝 equals("Hello Java")</button>
+      <button onclick="replace()">🔁 replace("Java", "World")</button>
+    </div>
+
+    <div class="output" id="output">Output will appear here...</div>
+
+    <script>
+      const str = "Hello Java";
+      const stringDisplay = document.getElementById("stringDisplay");
+      const output = document.getElementById("output");
+
+      function highlightRange(start, end) {
+        const before = str.slice(0, start);
+        const mid = `<span class='highlight'>${str.slice(start, end)}</span>`;
+        const after = str.slice(end);
+        stringDisplay.innerHTML = before + mid + after;
+      }
+
+      function getLength() {
+        stringDisplay.textContent = str;
+        output.textContent = `Length of "${str}" is ${str.length}`;
+      }
+
+      function charAt() {
+        highlightRange(1, 2);
+        output.textContent = `Character at index 1 is "${str.charAt(1)}"`;
+      }
+
+      function substring() {
+        highlightRange(0, 5);
+        output.textContent = `Substring(0, 5): "${str.substring(0, 5)}"`;
+      }
+
+      function toUpper() {
+        stringDisplay.textContent = str.toUpperCase();
+        output.textContent = `"${str}" converted to uppercase: "${str.toUpperCase()}"`;
+      }
+
+      function equals() {
+        stringDisplay.textContent = str;
+        const result = str === "Hello Java" ? "true" : "false";
+        output.textContent = `Does "${str}" equal "Hello Java"? → ${result}`;
+      }
+
+      function replace() {
+        const replaced = str.replace("Java", "World");
+        stringDisplay.textContent = replaced;
+        output.textContent = `Replaced "Java" with "World": "${replaced}"`;
+      }
+    </script>
+  </body>
+</html>

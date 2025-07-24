@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Topics | HTML Learning</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #ffe0b2, #fff3e0);
+        padding: 20px;
+      }
+
+      nav {
+        background-color: #ef6c00;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+      }
+
+      nav h1 {
+        color: white;
+        font-size: 2rem;
+      }
+
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .topic-box {
+        background-color: #ff7043;
+        border-radius: 12px;
+        padding: 15px 20px;
+        text-align: center;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .topic-box:hover {
+        transform: translateY(-5px);
+        background-color: #f4511e;
+      }
+
+      .topic-box a {
+        color: #fff;
+        font-weight: 600;
+        text-decoration: none;
+        display: block;
+        font-size: 1rem;
+      }
+
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #555;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 600px) {
+        nav h1 {
+          font-size: 1.5rem;
+        }
+
+        .topic-box a {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>HTML Topics for Students</h1>
+    </nav>
+
+    <section>
+      <div class="topic-box">
+        <a href="html_intro.html">Introduction to HTML</a>
+      </div>
+      <div class="topic-box">
+        <a href="html_structure.html">Basic HTML Structure</a>
+      </div>
+      <div class="topic-box">
+        <a href="html_elements.html">HTML Elements</a>
+      </div>
+      <div class="topic-box">
+        <a href="html_attributes.html">HTML Attributes</a>
+      </div>
+      <div class="topic-box">
+        <a href="html_headings.html">Headings & Paragraphs</a>
+      </div>
+      <div class="topic-box"><a href="html_links.html">Links</a></div>
+      <div class="topic-box"><a href="html_images.html">Images</a></div>
+      <div class="topic-box"><a href="html_lists.html">Lists (ul, ol)</a></div>
+      <div class="topic-box"><a href="html_tables.html">Tables</a></div>
+      <div class="topic-box"><a href="html_forms.html">Forms</a></div>
+      <div class="topic-box">
+        <a href="html_input_types.html">Input Types</a>
+      </div>
+      <div class="topic-box"><a href="html_buttons.html">Buttons</a></div>
+      <div class="topic-box">
+        <a href="html_semantic.html">Semantic Tags</a>
+      </div>
+      <div class="topic-box">
+        <a href="html_media.html">Multimedia (audio, video)</a>
+      </div>
+      <div class="topic-box"><a href="html_iframe.html">iFrames</a></div>
+      <div class="topic-box">
+        <a href="html_block_inline.html">Block vs Inline</a>
+      </div>
+      <div class="topic-box"><a href="html_id_class.html">ID and Class</a></div>
+      <div class="topic-box">
+        <a href="html_doctype.html">DOCTYPE & Comments</a>
+      </div>
+      <div class="topic-box">
+        <a href="html_responsive.html">Responsive Design Basics</a>
+      </div>
+      <div class="topic-box"><a href="html_css_link.html">Linking CSS</a></div>
+      <div class="topic-box">
+        <a href="html_project.html">Mini HTML Project</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Student HTML Learning Platform | Learn HTML with Ease</p>
+    </footer>
+  </body>
+</html>

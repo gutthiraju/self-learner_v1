@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2D Array Animation</title>
+    <style>
+      body {
+        font-family: monospace;
+        background-color: #fff3e0;
+        text-align: center;
+        padding: 40px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 80px);
+        gap: 10px;
+        justify-content: center;
+        margin-top: 20px;
+      }
+      .cell {
+        padding: 20px;
+        border: 2px solid #ff6f00;
+        border-radius: 10px;
+        background-color: #ffe082;
+        font-size: 18px;
+        transition: 0.3s;
+      }
+      .highlight {
+        background-color: #ffca28;
+        box-shadow: 0 0 15px #f57f17;
+      }
+      #output {
+        margin-top: 25px;
+        padding: 15px;
+        background-color: #ff6f00;
+        color: white;
+        border-radius: 8px;
+        font-size: 16px;
+        white-space: pre-line;
+      }
+      button {
+        background-color: #ef6c00;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🔢 2D Array Traversal Animation</h2>
+    <div class="grid" id="matrix">
+      <div class="cell">1</div>
+      <div class="cell">2</div>
+      <div class="cell">3</div>
+      <div class="cell">4</div>
+      <div class="cell">5</div>
+      <div class="cell">6</div>
+    </div>
+
+    <button onclick="startTraversal()">▶️ Start Traversal</button>
+
+    <div id="output">Output:</div>
+
+    <script>
+      const values = [
+        [1, 2, 3],
+        [4, 5, 6],
+      ];
+
+      function startTraversal() {
+        const cells = document.getElementsByClassName("cell");
+        Array.from(cells).forEach((c) => c.classList.remove("highlight"));
+        document.getElementById("output").innerText = "Output:";
+
+        let i = 0,
+          j = 0;
+        let flatIndex = 0;
+        const total = values.length * values[0].length;
+
+        const interval = setInterval(() => {
+          if (flatIndex > 0) cells[flatIndex - 1].classList.remove("highlight");
+          if (flatIndex < total) {
+            const row = Math.floor(flatIndex / 3);
+            const col = flatIndex % 3;
+            cells[flatIndex].classList.add("highlight");
+            document.getElementById(
+              "output"
+            ).innerText += `\nElement at [${row}][${col}] = ${values[row][col]}`;
+            flatIndex++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

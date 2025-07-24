@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java Variables Visualization</title>
+    <style>
+      body {
+        font-family: monospace;
+        background-color: #f5f5f5;
+        padding: 20px;
+      }
+      .line {
+        margin: 5px 0;
+      }
+      .highlight {
+        background-color: #d0f0c0;
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+      .output {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Variables and Data Types</h2>
+    <div class="line" id="line1">int age = 25;</div>
+    <div class="line" id="line2">float price = 99.99f;</div>
+    <div class="line" id="line3">double pi = 3.14159;</div>
+    <div class="line" id="line4">char grade = 'A';</div>
+    <div class="line" id="line5">boolean isJavaFun = true;</div>
+    <div class="line" id="line6">String name = "Alice";</div>
+    <div class="line" id="line7">System.out.println(...);</div>
+
+    <div class="output" id="output"></div>
+
+    <script>
+      const lines = [
+        { id: "line1", output: "Age: 25" },
+        { id: "line2", output: "Price: 99.99" },
+        { id: "line3", output: "Pi: 3.14159" },
+        { id: "line4", output: "Grade: A" },
+        { id: "line5", output: "Is Java Fun? true" },
+        { id: "line6", output: "Name: Alice" },
+      ];
+
+      let index = 0;
+
+      function highlightNextLine() {
+        if (index > 0) {
+          document
+            .getElementById(lines[index - 1].id)
+            .classList.remove("highlight");
+        }
+
+        if (index < lines.length) {
+          const line = lines[index];
+          document.getElementById(line.id).classList.add("highlight");
+          document.getElementById("output").innerHTML += line.output + "<br>";
+          index++;
+        } else {
+          clearInterval(timer);
+        }
+      }
+
+      const timer = setInterval(highlightNextLine, 1500);
+    </script>
+  </body>
+</html>

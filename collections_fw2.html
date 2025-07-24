@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>HashSet Internal Working Animation</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #fff3e0;
+        padding: 30px;
+        text-align: center;
+      }
+      h2 {
+        color: #ef6c00;
+      }
+      .hashset-container {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin: 40px 0;
+      }
+      .bucket {
+        width: 100px;
+        min-height: 120px;
+        background-color: #ffe0b2;
+        border-radius: 12px;
+        box-shadow: 0 0 10px #ffb74d;
+        padding: 10px;
+        position: relative;
+      }
+      .bucket-title {
+        font-weight: bold;
+        color: #e65100;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #f57c00;
+        padding-bottom: 4px;
+      }
+      .element {
+        width: 70px;
+        height: 40px;
+        background-color: #ffb74d;
+        color: white;
+        border-radius: 8px;
+        margin: 5px auto;
+        line-height: 40px;
+        font-weight: bold;
+        box-shadow: 0 0 8px #ef6c00;
+        transition: background-color 0.5s ease;
+      }
+      .highlight {
+        background-color: #fdd835 !important;
+        color: black !important;
+        font-weight: bolder !important;
+        box-shadow: 0 0 12px #fbc02d !important;
+      }
+      .duplicate {
+        background-color: #e53935 !important;
+        text-decoration: line-through;
+        opacity: 0.6;
+      }
+      button {
+        background-color: #ef6c00;
+        color: white;
+        border: none;
+        padding: 12px 28px;
+        font-size: 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      button:hover {
+        background-color: #bf360c;
+      }
+      #log {
+        background-color: #ffe0b2;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 30px auto;
+        padding: 15px;
+        font-family: monospace;
+        font-size: 16px;
+        color: #e65100;
+        min-height: 50px;
+        white-space: pre-wrap;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>HashSet Internal Working Animation</h2>
+
+    <div class="hashset-container">
+      <div class="bucket" id="bucket0">
+        <div class="bucket-title">Bucket 0</div>
+      </div>
+      <div class="bucket" id="bucket1">
+        <div class="bucket-title">Bucket 1</div>
+      </div>
+      <div class="bucket" id="bucket2">
+        <div class="bucket-title">Bucket 2</div>
+      </div>
+      <div class="bucket" id="bucket3">
+        <div class="bucket-title">Bucket 3</div>
+      </div>
+      <div class="bucket" id="bucket4">
+        <div class="bucket-title">Bucket 4</div>
+      </div>
+    </div>
+
+    <button onclick="runHashSetAnimation()">▶️ Run HashSet Animation</button>
+
+    <div id="log">Click the button to start animation...</div>
+
+    <script>
+      const buckets = [
+        document.getElementById("bucket0"),
+        document.getElementById("bucket1"),
+        document.getElementById("bucket2"),
+        document.getElementById("bucket3"),
+        document.getElementById("bucket4"),
+      ];
+      const log = document.getElementById("log");
+
+      // Hash function (simple modulo on length of string)
+      function hash(value) {
+        return value.length % 5;
+      }
+
+      // To keep track of elements in buckets
+      const hashSetBuckets = [[], [], [], [], []];
+
+      async function delay(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      async function highlightElement(el) {
+        el.classList.add("highlight");
+        await delay(1200);
+        el.classList.remove("highlight");
+      }
+
+      async function runHashSetAnimation() {
+        // Reset buckets and log
+        hashSetBuckets.forEach((arr) => (arr.length = 0));
+        buckets.forEach((bucket) =>
+          bucket.querySelectorAll(".element").forEach((e) => e.remove())
+        );
+        log.textContent = "Starting HashSet Animation...";
+
+        // Elements to add (some with same hash to show collision)
+        const elements = ["Cat", "Dog", "Bird", "Fish", "Bat", "Dog"];
+
+        for (let val of elements) {
+          const bucketIndex = hash(val);
+          log.textContent = `Adding "${val}" → Hash: ${bucketIndex}`;
+
+          // Check for duplicate
+          if (hashSetBuckets[bucketIndex].includes(val)) {
+            log.textContent = `Duplicate "${val}" found in bucket ${bucketIndex}, ignored.`;
+            // Show rejected duplicate in bucket in red
+            const dupEl = document.createElement("div");
+            dupEl.textContent = val;
+            dupEl.classList.add("element", "duplicate");
+            buckets[bucketIndex].appendChild(dupEl);
+            await highlightElement(dupEl);
+            await delay(1000);
+            dupEl.remove();
+          } else {
+            // Add element to bucket
+            hashSetBuckets[bucketIndex].push(val);
+            const el = document.createElement("div");
+            el.textContent = val;
+            el.classList.add("element");
+            buckets[bucketIndex].appendChild(el);
+            await highlightElement(el);
+          }
+        }
+        log.textContent =
+          "Animation complete! HashSet stores unique values only.";
+      }
+    </script>
+  </body>
+</html>

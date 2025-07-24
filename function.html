@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Java Functions Visual</title>
+    <style>
+      body {
+        font-family: "Courier New", monospace;
+        background-color: #f0f8ff;
+        padding: 20px;
+      }
+
+      .box {
+        padding: 10px;
+        margin: 8px 0;
+        border-radius: 10px;
+        border: 2px solid #ccc;
+        transition: background 0.4s;
+      }
+
+      .function-box {
+        background-color: #fff3cd;
+        border-color: #ffc107;
+      }
+      .call-box {
+        background-color: #d4edda;
+        border-color: #28a745;
+      }
+      .execute-box {
+        background-color: #f8d7da;
+        border-color: #dc3545;
+      }
+      .highlight {
+        border: 4px solid #000;
+      }
+
+      .output {
+        margin-top: 20px;
+        background: #222;
+        color: #0f0;
+        padding: 10px;
+        border-radius: 5px;
+        min-height: 40px;
+      }
+
+      button {
+        padding: 10px 15px;
+        background: #007bff;
+        border: none;
+        color: white;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🔧 Java Method (Function) Visualization</h2>
+
+    <div id="step1" class="box call-box">1️⃣ `main()` method starts</div>
+    <div id="step2" class="box call-box">2️⃣ Call `greet()` method</div>
+    <div id="step3" class="box function-box">
+      3️⃣ `greet()` function definition
+    </div>
+    <div id="step4" class="box execute-box">
+      4️⃣ Inside `greet()`: print message
+    </div>
+
+    <button onclick="startAnimation()">▶️ Run Animation</button>
+
+    <div class="output" id="outputBox">Output:</div>
+
+    <script>
+      function startAnimation() {
+        let boxes = ["step1", "step2", "step3", "step4"];
+        let outputText = ["", "", "", "Hello from the greet function!"];
+        let step = 0;
+
+        boxes.forEach((id) =>
+          document.getElementById(id).classList.remove("highlight")
+        );
+        document.getElementById("outputBox").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (step > 0) {
+            document
+              .getElementById(boxes[step - 1])
+              .classList.remove("highlight");
+          }
+
+          if (step < boxes.length) {
+            document.getElementById(boxes[step]).classList.add("highlight");
+            if (outputText[step]) {
+              document.getElementById("outputBox").innerText +=
+                "\n" + outputText[step];
+            }
+            step++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1200);
+      }
+    </script>
+  </body>
+</html>

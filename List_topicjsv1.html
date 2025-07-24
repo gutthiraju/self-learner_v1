@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Topics</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Quicksand", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(135deg, #fff8e1, #ffe0b2);
+        padding: 20px;
+      }
+
+      nav {
+        background-color: #0d1b2a;
+        padding: 20px;
+        text-align: center;
+        border-radius: 12px;
+        margin-bottom: 30px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+      }
+
+      nav h1 {
+        color: #ffcc00;
+        font-size: 2.2rem;
+      }
+
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+        gap: 20px;
+      }
+
+      .topic-card {
+        background: #ffeb3b;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        transition: all 0.3s ease;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transform: rotate(-1deg);
+      }
+
+      .topic-card:hover {
+        transform: scale(1.05) rotate(0deg);
+        background-color: #fbc02d;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      }
+
+      .topic-card a {
+        text-decoration: none;
+        color: #1a1a1a;
+        font-size: 1.05rem;
+        font-weight: 600;
+      }
+
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 0.95rem;
+        color: #444;
+      }
+
+      @media (max-width: 600px) {
+        nav h1 {
+          font-size: 1.5rem;
+        }
+
+        .topic-card a {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>JavaScript Topics for Students</h1>
+    </nav>
+
+    <section>
+      <div class="topic-card">
+        <a href="js_intro.html">Introduction to JavaScript</a>
+      </div>
+      <div class="topic-card">
+        <a href="js_variables.html">Variables (var, let, const)</a>
+      </div>
+      <div class="topic-card"><a href="js_datatypes.html">Data Types</a></div>
+      <div class="topic-card"><a href="js_operators.html">Operators</a></div>
+      <div class="topic-card">
+        <a href="js_conditions.html">Conditional Statements</a>
+      </div>
+      <div class="topic-card">
+        <a href="js_loops.html">Loops (for, while, do-while)</a>
+      </div>
+      <div class="topic-card"><a href="js_functions.html">Functions</a></div>
+      <div class="topic-card"><a href="js_arrays.html">Arrays</a></div>
+      <div class="topic-card"><a href="js_objects.html">Objects</a></div>
+      <div class="topic-card"><a href="js_events.html">Events</a></div>
+      <div class="topic-card"><a href="js_dom.html">DOM Manipulation</a></div>
+      <div class="topic-card">
+        <a href="js_timing.html">setTimeout & setInterval</a>
+      </div>
+      <div class="topic-card">
+        <a href="js_stringmethods.html">String Methods</a>
+      </div>
+      <div class="topic-card">
+        <a href="js_arraymethods.html">Array Methods</a>
+      </div>
+      <div class="topic-card"><a href="js_arrow.html">Arrow Functions</a></div>
+      <div class="topic-card"><a href="js_callback.html">Callbacks</a></div>
+      <div class="topic-card"><a href="js_promises.html">Promises</a></div>
+      <div class="topic-card"><a href="js_async.html">Async / Await</a></div>
+      <div class="topic-card"><a href="js_classes.html">Classes & OOP</a></div>
+      <div class="topic-card">
+        <a href="js_modules.html">JavaScript Modules</a>
+      </div>
+      <div class="topic-card"><a href="js_json.html">Working with JSON</a></div>
+      <div class="topic-card">
+        <a href="js_localstorage.html">Local Storage</a>
+      </div>
+      <div class="topic-card"><a href="js_errors.html">Error Handling</a></div>
+      <div class="topic-card">
+        <a href="js_project.html">Mini JS Project</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Learn JavaScript | Interactive Learning Made Easy</p>
+    </footer>
+  </body>
+</html>

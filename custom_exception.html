@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Java Custom Exception Animation</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #fff3e0;
+        text-align: center;
+        padding: 30px;
+      }
+      .code-block {
+        background: #ffcc80;
+        border-radius: 10px;
+        max-width: 700px;
+        margin: 0 auto 25px;
+        font-family: monospace;
+        font-size: 16px;
+        padding: 20px;
+        text-align: left;
+        white-space: pre-wrap;
+      }
+      .highlight {
+        background-color: #d84315;
+        color: white;
+        padding: 2px 6px;
+        border-radius: 5px;
+      }
+      .output {
+        background-color: #dcedc8;
+        border-radius: 10px;
+        max-width: 700px;
+        margin: 20px auto;
+        padding: 15px;
+        font-size: 18px;
+        color: #33691e;
+        min-height: 60px;
+      }
+      button {
+        background-color: #ef6c00;
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        font-weight: bold;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #e65100;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>⚙️ Custom Exception Animation in Java</h2>
+
+    <div class="code-block" id="codeBlock">
+      class MyException extends Exception {<br />
+      &nbsp;&nbsp;MyException(String message) {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;super(message);<br />
+      &nbsp;&nbsp;}<br />
+      }<br /><br />
+      class CustomExceptionDemo {<br />
+      &nbsp;&nbsp;static void validate(int age)
+      <span class="throws">throws</span> MyException {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;if (age &lt; 18) {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new MyException("Age must be at
+      least 18.");<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;} else {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Age validated
+      successfully.");<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+      &nbsp;&nbsp;}<br /><br />
+      &nbsp;&nbsp;public static void main(String[] args) {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;try {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;validate(16);<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;} catch (MyException e) {<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println("Caught Exception:
+      " + e.getMessage());<br />
+      &nbsp;&nbsp;&nbsp;&nbsp;}<br />
+      &nbsp;&nbsp;}<br />
+      }
+    </div>
+
+    <button onclick="runAnimation()">▶️ Run Animation</button>
+
+    <div class="output" id="output">Output will appear here...</div>
+
+    <script>
+      const codeBlock = document.getElementById("codeBlock");
+      const output = document.getElementById("output");
+
+      function clearHighlight() {
+        [...codeBlock.querySelectorAll(".highlight")].forEach((el) =>
+          el.classList.remove("highlight")
+        );
+      }
+
+      function highlightLine(lineNum) {
+        clearHighlight();
+        const lines = codeBlock.innerHTML.split("<br>");
+        // Wrap the specific line in highlight span
+        lines[lineNum] = `<span class="highlight">${lines[lineNum]}</span>`;
+        codeBlock.innerHTML = lines.join("<br>");
+      }
+
+      async function runAnimation() {
+        output.textContent = "Starting animation...";
+        let delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+        // Step 1: Check age < 18
+        highlightLine(9); // if (age < 18) {
+        output.textContent = "Checking if age < 18...";
+        await delay(2000);
+
+        // Step 2: Throw custom exception
+        highlightLine(10); // throw new MyException("Age must be at least 18.");
+        output.textContent = "Throwing MyException...";
+        await delay(2000);
+
+        // Step 3: Exception caught in catch block
+        highlightLine(16); // catch block
+        output.textContent = "Exception caught in catch block.";
+        await delay(2000);
+
+        // Step 4: Print exception message
+        output.textContent =
+          "Output:\nCaught Exception: Age must be at least 18.";
+        clearHighlight();
+      }
+    </script>
+  </body>
+</html>

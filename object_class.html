@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Java Class & Object Animation</title>
+    <style>
+      body {
+        background: #e0f7fa;
+        font-family: monospace;
+        padding: 20px;
+      }
+
+      .class-box,
+      .object-box {
+        border: 3px solid #333;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 10px auto;
+        width: 300px;
+        text-align: center;
+        transition: transform 0.5s;
+      }
+
+      .class-box {
+        background: #fff3cd;
+        border-color: #ffca28;
+      }
+
+      .object-box {
+        background: #c8e6c9;
+        border-color: #43a047;
+      }
+
+      .highlight {
+        box-shadow: 0 0 10px 3px #000;
+      }
+
+      button {
+        background: #00796b;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .info {
+        background: #263238;
+        color: #00ff00;
+        padding: 10px;
+        border-radius: 6px;
+        margin-top: 20px;
+        white-space: pre-line;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🚗 Java Class & Object: Step-by-Step Animation</h2>
+
+    <div id="step1" class="class-box">
+      🔧 Class: Car<br /><br />Fields:<br />brand<br />speed<br /><br />Method:<br />displayInfo()
+    </div>
+    <div id="step2" class="object-box">
+      📦 Object: myCar<br /><br />brand = ?<br />speed = ?
+    </div>
+    <div id="step3" class="object-box">
+      📦 Object: myCar<br /><br />brand = "Tesla"<br />speed = 120
+    </div>
+
+    <button onclick="animate()">▶️ Start Animation</button>
+
+    <div class="info" id="output">Output:</div>
+
+    <script>
+      function animate() {
+        const steps = ["step1", "step2", "step3"];
+        const messages = ["", "", "Brand: Tesla\nSpeed: 120 km/h"];
+        let i = 0;
+
+        steps.forEach((id) =>
+          document.getElementById(id).classList.remove("highlight")
+        );
+        document.getElementById("output").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (i > 0)
+            document.getElementById(steps[i - 1]).classList.remove("highlight");
+          if (i < steps.length) {
+            document.getElementById(steps[i]).classList.add("highlight");
+            if (messages[i])
+              document.getElementById("output").innerText += "\n" + messages[i];
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1500);
+      }
+    </script>
+  </body>
+</html>

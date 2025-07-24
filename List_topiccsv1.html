@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Topics | CSS Learning</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background: linear-gradient(to right, #e0f7fa, #ede7f6);
+        padding: 20px;
+      }
+
+      nav {
+        background: linear-gradient(135deg, #512da8, #673ab7);
+        padding: 20px;
+        text-align: center;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        margin-bottom: 30px;
+      }
+
+      nav h1 {
+        color: #ffffff;
+        font-size: 2rem;
+        letter-spacing: 1px;
+      }
+
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+      }
+
+      .topic-box {
+        background: #7e57c2;
+        border-radius: 14px;
+        padding: 15px 20px;
+        text-align: center;
+        transition: 0.3s ease;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .topic-box:hover {
+        transform: scale(1.05);
+        background: #5e35b1;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .topic-box a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1rem;
+        display: block;
+      }
+
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        font-size: 0.9rem;
+        color: #555;
+      }
+
+      @media (max-width: 600px) {
+        nav h1 {
+          font-size: 1.4rem;
+        }
+
+        .topic-box a {
+          font-size: 0.95rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h1>CSS Topics for Students</h1>
+    </nav>
+
+    <section>
+      <div class="topic-box">
+        <a href="css_intro.html">Introduction to CSS</a>
+      </div>
+      <div class="topic-box">
+        <a href="css_selectors.html">CSS Selectors</a>
+      </div>
+      <div class="topic-box"><a href="css_syntax.html">CSS Syntax</a></div>
+      <div class="topic-box">
+        <a href="css_colors.html">Colors & Backgrounds</a>
+      </div>
+      <div class="topic-box"><a href="css_text.html">Text Styling</a></div>
+      <div class="topic-box">
+        <a href="css_fonts.html">Fonts & Web Fonts</a>
+      </div>
+      <div class="topic-box"><a href="css_boxmodel.html">Box Model</a></div>
+      <div class="topic-box">
+        <a href="css_borders.html">Borders & Outlines</a>
+      </div>
+      <div class="topic-box">
+        <a href="css_margins.html">Margins & Padding</a>
+      </div>
+      <div class="topic-box">
+        <a href="css_display.html">Display Property</a>
+      </div>
+      <div class="topic-box">
+        <a href="css_positioning.html">Positioning</a>
+      </div>
+      <div class="topic-box"><a href="css_flexbox.html">Flexbox</a></div>
+      <div class="topic-box"><a href="css_grid.html">CSS Grid</a></div>
+      <div class="topic-box"><a href="css_media.html">Media Queries</a></div>
+      <div class="topic-box">
+        <a href="css_responsive.html">Responsive Layout</a>
+      </div>
+      <div class="topic-box"><a href="css_hover.html">Hover Effects</a></div>
+      <div class="topic-box">
+        <a href="css_transitions.html">Transitions</a>
+      </div>
+      <div class="topic-box">
+        <a href="css_animations.html">CSS Animations</a>
+      </div>
+      <div class="topic-box">
+        <a href="css_variables.html">CSS Variables</a>
+      </div>
+      <div class="topic-box">
+        <a href="css_pseudo.html">Pseudo-classes & Elements</a>
+      </div>
+      <div class="topic-box"><a href="css_zindex.html">Z-Index</a></div>
+      <div class="topic-box"><a href="css_overflow.html">Overflow</a></div>
+      <div class="topic-box"><a href="css_shadow.html">Shadows</a></div>
+      <div class="topic-box">
+        <a href="css_units.html">CSS Units (em, rem, %)</a>
+      </div>
+      <div class="topic-box">
+        <a href="css_project.html">Mini CSS Project</a>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2025 Student CSS Learning Platform | Master Styling Today</p>
+    </footer>
+  </body>
+</html>

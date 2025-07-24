@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Runtime Polymorphism</title>
+    <style>
+      body {
+        background: #fff3e0;
+        font-family: monospace;
+        text-align: center;
+        padding: 30px;
+      }
+      .box {
+        border: 3px solid #ef6c00;
+        background: #ffe0b2;
+        border-radius: 12px;
+        padding: 20px;
+        margin: 20px auto;
+        width: 400px;
+        transition: all 0.5s;
+      }
+      .highlight {
+        background: #ffb74d;
+        box-shadow: 0 0 15px #e65100;
+      }
+      #output {
+        margin-top: 20px;
+        background: #e65100;
+        color: white;
+        padding: 15px;
+        font-size: 18px;
+        border-radius: 10px;
+        white-space: pre-line;
+      }
+      button {
+        padding: 12px 20px;
+        background-color: #ef6c00;
+        color: white;
+        font-weight: bold;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🐾 Runtime Polymorphism (Method Overriding)</h2>
+
+    <div id="step1" class="box">
+      Reference: <code>Animal a = new Dog()</code><br />
+      Call: <code>a.sound()</code><br />
+      ➡️ Output: <strong>Bark</strong>
+    </div>
+
+    <div id="step2" class="box">
+      Reference: <code>Animal a = new Cat()</code><br />
+      Call: <code>a.sound()</code><br />
+      ➡️ Output: <strong>Meow</strong>
+    </div>
+
+    <button onclick="runOverride()">▶️ Start Overriding Animation</button>
+    <div id="output">Output:</div>
+
+    <script>
+      function runOverride() {
+        let steps = ["step1", "step2"];
+        let outputs = ["Bark", "Meow"];
+        let i = 0;
+
+        steps.forEach((s) =>
+          document.getElementById(s).classList.remove("highlight")
+        );
+        document.getElementById("output").innerText = "Output:";
+
+        let interval = setInterval(() => {
+          if (i > 0)
+            document.getElementById(steps[i - 1]).classList.remove("highlight");
+          if (i < steps.length) {
+            document.getElementById(steps[i]).classList.add("highlight");
+            document.getElementById("output").innerText += "\n" + outputs[i];
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1800);
+      }
+    </script>
+  </body>
+</html>

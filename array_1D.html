@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>1D Array Animation</title>
+    <style>
+      body {
+        background-color: #f0f4ff;
+        font-family: monospace;
+        text-align: center;
+        padding: 40px;
+      }
+      .array-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+      }
+      .element {
+        background-color: #90caf9;
+        margin: 5px;
+        padding: 20px;
+        width: 60px;
+        border: 2px solid #1976d2;
+        border-radius: 10px;
+        transition: 0.3s;
+      }
+      .highlight {
+        background-color: #64b5f6;
+        box-shadow: 0 0 15px #1565c0;
+      }
+      #output {
+        margin-top: 20px;
+        background: #0d47a1;
+        color: white;
+        padding: 15px;
+        border-radius: 10px;
+        white-space: pre-line;
+      }
+      button {
+        padding: 10px 20px;
+        margin-top: 20px;
+        background-color: #1976d2;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>🔢 1D Array Animation</h2>
+    <div class="array-container" id="array">
+      <div class="element">10</div>
+      <div class="element">20</div>
+      <div class="element">30</div>
+      <div class="element">40</div>
+      <div class="element">50</div>
+    </div>
+    <button onclick="animateArray()">▶️ Start Traversal</button>
+    <div id="output">Output:</div>
+
+    <script>
+      let i = 0;
+      const values = [10, 20, 30, 40, 50];
+      const elements = document.getElementsByClassName("element");
+
+      function animateArray() {
+        i = 0;
+        document.getElementById("output").innerText = "Output:";
+        Array.from(elements).forEach((el) => el.classList.remove("highlight"));
+        const interval = setInterval(() => {
+          if (i > 0) elements[i - 1].classList.remove("highlight");
+          if (i < values.length) {
+            elements[i].classList.add("highlight");
+            document.getElementById(
+              "output"
+            ).innerText += `\nIndex ${i}: ${values[i]}`;
+            i++;
+          } else {
+            clearInterval(interval);
+          }
+        }, 1000);
+      }
+    </script>
+  </body>
+</html>

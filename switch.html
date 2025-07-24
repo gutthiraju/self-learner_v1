@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Java Switch Case Simulation</title>
+    <style>
+      body {
+        font-family: monospace;
+        background: #e6f7ff;
+        padding: 20px;
+      }
+      .line {
+        margin: 8px 0;
+      }
+      .highlight {
+        background: #d1f2eb;
+        padding: 5px;
+        border-radius: 5px;
+      }
+      .output {
+        font-weight: bold;
+        margin-top: 15px;
+      }
+      select,
+      button {
+        margin-top: 10px;
+        padding: 5px 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Java `switch` Statement</h2>
+    <div class="line" id="line1">switch (day) {</div>
+    <div class="line" id="line2">
+      case 1: System.out.println("Monday"); break;
+    </div>
+    <div class="line" id="line3">
+      case 2: System.out.println("Tuesday"); break;
+    </div>
+    <div class="line" id="line4">
+      case 3: System.out.println("Wednesday"); break;
+    </div>
+    <div class="line" id="line5">
+      default: System.out.println("Invalid day");
+    </div>
+    <div class="line" id="line6">}</div>
+
+    <label>Select Day Number: </label>
+    <select id="day">
+      <option value="1">1 (Monday)</option>
+      <option value="2">2 (Tuesday)</option>
+      <option value="3">3 (Wednesday)</option>
+      <option value="9">9 (Invalid)</option>
+    </select>
+
+    <button onclick="runSwitch()">Run Switch</button>
+
+    <div class="output" id="result"></div>
+
+    <script>
+      function runSwitch() {
+        document
+          .querySelectorAll(".line")
+          .forEach((l) => l.classList.remove("highlight"));
+        const val = parseInt(document.getElementById("day").value);
+        let result = "";
+        let highlightId = "";
+
+        switch (val) {
+          case 1:
+            highlightId = "line2";
+            result = "Monday";
+            break;
+          case 2:
+            highlightId = "line3";
+            result = "Tuesday";
+            break;
+          case 3:
+            highlightId = "line4";
+            result = "Wednesday";
+            break;
+          default:
+            highlightId = "line5";
+            result = "Invalid day";
+            break;
+        }
+
+        document.getElementById(highlightId).classList.add("highlight");
+        document.getElementById("result").innerText = "Output: " + result;
+      }
+    </script>
+  </body>
+</html>
